@@ -1,94 +1,76 @@
-import * as ts from "typescript";
+import chalk from "chalk";
+import { spawn, ChildProcessWithoutNullStreams } from "child_process";
+import watchMain from "./util/watchMain";
 
-const formatHost: ts.FormatDiagnosticsHost = {
-  getCanonicalFileName: path => path,
-  getCurrentDirectory: ts.sys.getCurrentDirectory,
-  getNewLine: () => ts.sys.newLine
-};
+// Keep track of time so we know how long traspiling takes
+let timestamp: number = Date.now();
 
-function watchMain() {
-  const configPath = ts.findConfigFile(
-    /*searchPath*/ "./",
-    ts.sys.fileExists,
-    "tsconfig.json"
-  );
+// Default child process state
+let killed = true;
 
-  if (!configPath) {
-    throw new Error("Could not find a valid 'tsconfig.json'.");
-  }
-
-  // TypeScript can use several different program creation "strategies":
-  //  * ts.createEmitAndSemanticDiagnosticsBuilderProgram,
-  //  * ts.createSemanticDiagnosticsBuilderProgram
-  //  * ts.createAbstractBuilder
-  // The first two produce "builder programs". These use an incremental strategy
-  // to only re-check and emit files whose contents may have changed, or whose
-  // dependencies may have changes which may impact change the result of prior
-  // type-check and emit.
-  // The last uses an ordinary program which does a full type check after every
-  // change.
-  // Between `createEmitAndSemanticDiagnosticsBuilderProgram` and
-  // `createSemanticDiagnosticsBuilderProgram`, the only difference is emit.
-  // For pure type-checking scenarios, or when another tool/process handles emit,
-  // using `createSemanticDiagnosticsBuilderProgram` may be more desirable.
-  const createProgram = ts.createSemanticDiagnosticsBuilderProgram;
-
-  // Note that there is another overload for `createWatchCompilerHost` that takes
-  // a set of root files.
-  const host = ts.createWatchCompilerHost(
-    configPath,
-    {},
-    ts.sys,
-    createProgram,
-    reportDiagnostic,
-    reportWatchStatusChanged
-  );
-
-  // You can technically override any given hook on the host, though you probably don't need to.
-  // Note that we're assuming `origCreateProgram` and `origPostProgramCreate`
-  // doesn't use `this` at all.
-  const origCreateProgram = host.createProgram;
-
-  host.createProgram = (
-    rootNames: ReadonlyArray<string>,
-    options,
-    host,
-    oldProgram
-  ) => {
-    console.log("** We're about to create the program! **");
-    return origCreateProgram(rootNames, options, host, oldProgram);
-  };
-
-  const origPostProgramCreate = host.afterProgramCreate;
-
-  host.afterProgramCreate = program => {
-    console.log("** We finished making the program! **");
-    origPostProgramCreate!(program);
-  };
-
-  // `createWatchProgram` creates an initial program, watches files, and updates
-  // the program over time.
-  ts.createWatchProgram(host);
-}
-
-function reportDiagnostic(diagnostic: ts.Diagnostic) {
-  console.error(
-    "Error",
-    diagnostic.code,
-    ":",
-    ts.flattenDiagnosticMessageText(
-      diagnostic.messageText,
-      formatHost.getNewLine()
-    )
-  );
-}
+// Child process instance
+let app: ChildProcessWithoutNullStreams | undefined;
 
 /**
- * Prints a diagnostic every time the watch status changes.
- * This is mainly for messages like "Starting compilation" or "Compilation completed".
+ *  Keep track of child process state to make sure we don't start a new one before the running process is killed
  */
-function reportWatchStatusChanged(diagnostic: ts.Diagnostic) {
-  console.info(ts.formatDiagnostic(diagnostic, formatHost));
+const waitForKill = () => new Promise<void>((resolve, reject) => {
+  let timeout = setTimeout(reject, 5000);
+
+  let interval = setInterval(() => {
+    if (killed) {
+      clearTimeout(timeout);
+      clearInterval(interval);
+
+      resolve();
+    }
+  }, 50);
+});
+
+/**
+ * Update time right before compiling starts
+ */
+const beforeCompile = () => (timestamp = Date.now())
+
+/**
+ * (Re)start application process after compiling
+ */
+const afterCompile = async () => {
+  // Kill running process if it exists
+  if (app) {
+    // @ts-ignore
+    app.kill("SIGINT");
+    await waitForKill();
+  }
+
+  console.clear();
+  console.info(
+    chalk.green(`(Re)starting application (${Date.now() - timestamp}ms)\n`)
+  );
+
+  // Start application
+  app = spawn("node", ["./build/app/index.js"], {
+    env: {
+      ...process.env,
+      NODE_ENV: "development"
+    }
+  });
+
+  // Update process state
+  killed = false;
+
+  // Log console output
+  app.stdout.on("data", data => console.log(data));
+
+  // Log console error
+  app.stderr.on("data", data => console.error(data));
+
+  // Log when application closes
+  app.on("close", code => {
+    killed = true;
+    console.log(chalk.yellow(`Child process exited with code ${code}`));
+  });
 }
 
-watchMain();
+// Run typescript with project typescript configuration in watch mode
+watchMain({ beforeCompile, afterCompile });

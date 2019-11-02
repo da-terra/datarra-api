@@ -1,5 +1,12 @@
-# template-repository
+# studata-api
 
-# Development installation
+# Requirements
+- NodeJS 12.10 or higher
 
-We need the typescript compiler to compiler the code. Install the typescript compiler by running the following command `npm i -g typescript`.
+# Build steps
+
+## Step 1
+Compile build scripts to js `npm run init`
+
+## Step 2
+Compile application with built build script `npm run build`
