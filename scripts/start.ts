@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { spawn, ChildProcessWithoutNullStreams } from "child_process";
+import { spawn, ChildProcess } from "child_process";
 import watchMain from "./util/watchMain";
 
 // Keep track of time so we know how long traspiling takes
@@ -9,7 +9,7 @@ let timestamp: number = Date.now();
 let killed = true;
 
 // Child process instance
-let app: ChildProcessWithoutNullStreams | undefined;
+let app: ChildProcess | undefined;
 
 /**
  *  Keep track of child process state to make sure we don't start a new one before the running process is killed
@@ -53,17 +53,12 @@ const afterCompile = async () => {
     env: {
       ...process.env,
       NODE_ENV: "development"
-    }
+    },
+    stdio: "inherit"
   });
 
   // Update process state
   killed = false;
-
-  // Log console output
-  app.stdout.on("data", data => console.log(data));
-
-  // Log console error
-  app.stderr.on("data", data => console.error(data));
 
   // Log when application closes
   app.on("close", code => {
