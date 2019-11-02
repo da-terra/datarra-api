@@ -4,9 +4,14 @@
 - NodeJS 12.10 or higher
 
 # Build steps
+The build tools  in the repository are used to transpile the Typescript source code to Javascript. The transpiled Javascript can run using NodeJS 12.10 and higher.
 
-## Step 1
-Compile build scripts to js `npm run init`
+Follow these steps to start a development build for the application:
 
-## Step 2
-Compile application with built build script `npm run build`
+- Compile the build scripts to Javascript with `npm run init`
+- Compile and run the api with `npm run start`. The `start` script will build the application, watch for source changes, and start the application. The application will restart on incremental builds.
+
+Follow these steps to start a production build for the application:
+
+- Compile the build scripts to Javascript with `npm run init`
+- Compile and run the api with `npm run build`.
