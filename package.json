@@ -7,6 +7,7 @@
     "build": "tsc",
     "start": "node ./build/scripts/start.js",
     "serve": "node ./build/app/index.js",
+    "prettier": "prettier --write \"./**/*.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
