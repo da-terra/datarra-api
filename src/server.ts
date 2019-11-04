@@ -1,8 +1,5 @@
-import chalk from 'chalk';
-import { Express } from "express";
-
-// Express is not a ES module so we must import if with require
-const express = require("express");
+import chalk from "chalk";
+import express, { Express } from "express";
 
 export default (callback: Function) => {
   const app: Express = express();
@@ -12,5 +9,6 @@ export default (callback: Function) => {
   const port: number = (process as any).env.PORT || 4000;
 
   app.listen(port);
+
   console.log(chalk.yellowBright(`Listening to port ${port}`));
 };
