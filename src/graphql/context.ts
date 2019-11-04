@@ -1,4 +1,15 @@
+type User = {
+  name: string;
+};
 
-export default function() {
-  return {};
+export type GraphQLContext = {
+  user?: User;
+};
+
+export default function(): GraphQLContext {
+  return {
+    user: {
+      name: "Leroy Korterink"
+    }
+  };
 }
