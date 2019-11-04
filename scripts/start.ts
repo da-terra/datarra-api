@@ -53,7 +53,9 @@ const afterCompile = async () => {
   app = spawn("node", ["./build/app/index.js"], {
     env: {
       ...process.env,
-      NODE_ENV: "development"
+      NODE_ENV: "development",
+      PORT: "4000",
+      CORS_WHITELIST: "http://localhost:3000"
     },
     stdio: "inherit"
   });
