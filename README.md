@@ -1,10 +1,12 @@
 # studata-api
 
 # Requirements
+
 - NodeJS 12.10 or higher
 
 # Build steps
-The build tools  in the repository are used to transpile the Typescript source code to Javascript. The transpiled Javascript can run using NodeJS 12.10 and higher.
+
+The build tools in the repository are used to transpile the Typescript source code to Javascript. The transpiled Javascript can run using NodeJS 12.10 and higher.
 
 Follow these steps to start a development build for the application:
 
