@@ -8,7 +8,7 @@ const navigation = {
 };
 
 const header = {
-  type: "c1-header",
+  type: "c1-hero",
   data: {
     slogan: "Data in actie",
     buttons: [
