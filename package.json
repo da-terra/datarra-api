@@ -4,7 +4,7 @@
   "license": "GNU AGPLv3",
   "scripts": {
     "init": "tsc -p ./tsconfig.scripts.json",
-    "build": "tsc",
+    "build": "tsc -p ./tsconfig.json",
     "start": "node ./build/scripts/start.js",
     "serve": "node ./build/app/index.js",
     "prettier": "prettier --write \"./**/*.ts\"",
