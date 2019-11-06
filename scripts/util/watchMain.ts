@@ -1,3 +1,4 @@
+import rimraf from "rimraf";
 import chalk from "chalk";
 import * as ts from "typescript";
 
@@ -88,6 +89,9 @@ function watchMain(watchOptions: WatchOptions) {
     oldProgram
   ) => {
     console.log(chalk.green("We're about to create the program!"));
+
+    // Remove old build
+    rimraf.sync("./build/app");
 
     if (watchOptions && watchOptions.beforeCompile) {
       watchOptions.beforeCompile(rootNames, options, host, oldProgram);

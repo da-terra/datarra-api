@@ -2,8 +2,16 @@
 import { Express } from "express";
 
 import createServer from "./server";
-import createGraphQlMiddleware from "./graphQlMiddleware";
+import {
+  schema,
+  rootValue,
+  createGraphQlContextMiddleware,
+  createGraphQlMiddleware
+} from "./graphql";
+
+const context = createGraphQlContextMiddleware();
+const middleware = createGraphQlMiddleware({ schema, rootValue, context });
 
 createServer((server: Express) => {
-  server.use("/graphql", createGraphQlMiddleware());
+  server.use("/graphql", middleware);
 });

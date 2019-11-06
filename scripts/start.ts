@@ -1,5 +1,5 @@
-import chalk from "chalk";
 import { spawn, ChildProcess } from "child_process";
+import chalk from "chalk";
 import watchMain from "./util/watchMain";
 
 // Keep track of time so we know how long traspiling takes
@@ -14,23 +14,24 @@ let app: ChildProcess | undefined;
 /**
  *  Keep track of child process state to make sure we don't start a new one before the running process is killed
  */
-const waitForKill = () => new Promise<void>((resolve, reject) => {
-  let timeout = setTimeout(reject, 5000);
+const waitForKill = () =>
+  new Promise<void>((resolve, reject) => {
+    let timeout = setTimeout(reject, 5000);
 
-  let interval = setInterval(() => {
-    if (killed) {
-      clearTimeout(timeout);
-      clearInterval(interval);
+    let interval = setInterval(() => {
+      if (killed) {
+        clearTimeout(timeout);
+        clearInterval(interval);
 
-      resolve();
-    }
-  }, 50);
-});
+        resolve();
+      }
+    }, 50);
+  });
 
 /**
  * Update time right before compiling starts
  */
-const beforeCompile = () => (timestamp = Date.now())
+const beforeCompile = () => (timestamp = Date.now());
 
 /**
  * (Re)start application process after compiling
@@ -52,7 +53,9 @@ const afterCompile = async () => {
   app = spawn("node", ["./build/app/index.js"], {
     env: {
       ...process.env,
-      NODE_ENV: "development"
+      NODE_ENV: "development",
+      PORT: "4000",
+      CORS_WHITELIST: "http://localhost:3000"
     },
     stdio: "inherit"
   });
@@ -61,11 +64,12 @@ const afterCompile = async () => {
   killed = false;
 
   // Log when application closes
-  app.on("close", code => {
-    killed = true;
+  app.on("close", async code => {
     console.log(chalk.yellow(`Child process exited with code ${code}`));
+
+    killed = true;
   });
-}
+};
 
 // Run typescript with project typescript configuration in watch mode
 watchMain({ beforeCompile, afterCompile });
