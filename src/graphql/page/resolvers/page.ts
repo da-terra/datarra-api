@@ -35,7 +35,7 @@ const footer = {
       {
         uuid: "1",
         image: {
-          src: "/socialNetworks/twitter.svg",
+          src: "/socialNetworks/linkedIn.svg",
           alt: "LinkedIn logo",
           fallbackColor: "transparent"
         },
