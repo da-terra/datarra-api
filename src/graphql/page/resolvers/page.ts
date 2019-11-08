@@ -236,7 +236,7 @@ const featuredEvents = {
 const partners = {
   type: "c6-partners",
   data: {
-    title: "Samens staan we sterk",
+    title: "Samen staan we sterk",
     tag: "Partners",
     content:
       "Up to a certain time, a number of the deep analysis fairly the ultimate advantage of statistical product over alternate practices the share of corporate responsibilities and The Organization of Conservative Application.\n\n(Jerrell Griggs in The Book of the Interactive Services Detection)\nAt any rate, study of enduring practices effectively illustrates the utter importance of the participant evaluation sample.",
