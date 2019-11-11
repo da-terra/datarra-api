@@ -14,14 +14,17 @@ const header = {
     buttons: [
       {
         uuid: "1",
+        targetGroup: 1 << 0,
         children: "Ik ben hier namens een bedrijf"
       },
       {
         uuid: "2",
+        targetGroup: 1 << 1,
         children: "Ik ben een student"
       },
       {
         uuid: "3",
+        targetGroup: 1 << 2,
         children: "Ik ben een expert "
       }
     ]
