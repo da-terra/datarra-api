@@ -1,3 +1,5 @@
+import { NotFound } from "http-errors";
+
 const navigation = {
   type: "c0-navigation",
   data: {
@@ -295,8 +297,14 @@ type PageArguments = {
 export default (pageArguments: PageArguments) => {
   const { name } = pageArguments;
 
+  const pageData = pages[name];
+
+  if (!pageData) {
+    throw new NotFound(`Page \`${name}\` not found`);
+  }
+
   return {
     name,
-    blocks: pages[name]
+    blocks: pageData
   };
 };
