@@ -1,15 +1,11 @@
-type User = {
-  name: string;
-};
+import { createMongooseModel } from "../database";
 
-export type GraphQLContext = {
-  user?: User;
-};
+const createGraphQlContext = (): GraphQLContext => {
+  const mongoose = createMongooseModel();
 
-export default function(): GraphQLContext {
   return {
-    user: {
-      name: "Leroy Korterink"
-    }
+    mongoose
   };
-}
+};
+
+export default createGraphQlContext;

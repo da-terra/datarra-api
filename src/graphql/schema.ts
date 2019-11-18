@@ -6,7 +6,7 @@ import {
   quickScanMutations
 } from "./quickScan";
 
-import { pageTypes, pageQueries } from "./page";
+import { pageTypes, pageQueries, pageMutations } from "./page";
 
 /**
  * Schema build with GraphQL Schema Language
@@ -23,6 +23,7 @@ export default buildSchema(`
   }
 
   type Mutation {
+    ${pageMutations}
     ${quickScanMutations}
   }
 `);

@@ -13,7 +13,7 @@ Name             | Start script value      | Description
 `NODE_ENV`       | `development`           | Defines in which mode the application is running
 `PORT`           | `4000`                  | Port that the applications listens to
 `CORS_WHITELIST` | `http://localhost:3000` | The origins that are allowed to send cross origin requests to this application. Multiple origins can be added by seperating them with a `,`. eg. `http://localhost:3000,http://localhost:3001`
-
+`MONGO_DB_CONNECTION_STRING` | `undefined` | MongoDb connection string
 
 GraphiQL is enabled when the application is running in development mode. GraphiQL is a web interface that you can use to debug the application. You can find it on the [graphql endpoint](http://localhost:4000/graphql).
 
