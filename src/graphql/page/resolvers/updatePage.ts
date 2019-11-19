@@ -12,7 +12,7 @@ export default async (
   // Get page name from arguments
   const { name, blocks } = pageArguments;
 
-  const update = await context.mongoose.Page.update({ name }, { blocks });
+  const update = await context.mongoose.Page.updateOne({ name }, { blocks });
 
   if (update.n < 1) {
     throw new NotFound(`Page ${name} not found`);

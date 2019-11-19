@@ -11,7 +11,6 @@ export default (pageArguments: QuickScanArguments) => {
             label: "Het wordt opgeslagen zodat we het later terug kunnen zien",
             value: 0
           },
-
           {
             label: "Het wordt opgeslagen en verwerkt met kleine berekeningen",
             value: 1
@@ -21,7 +20,6 @@ export default (pageArguments: QuickScanArguments) => {
             label: "We slaan helemaal geen data op",
             value: 2
           },
-
           {
             label:
               "We gebruiken de data om te kijken wat er mogelijk in de toekomst gebeurt",

@@ -1,19 +1,26 @@
 import chalk from "chalk";
 import mongoose from "mongoose";
+import config from '../config';
 
-mongoose.connection.on("error", console.error);
+mongoose.connection.on("error", error => {
+  console.error(chalk.redBright(`MongoDB connection error: ${error}`));
+});
+
 mongoose.connection.once("open", () => {
-  console.log(chalk.yellowBright(`Database connection established`));
+  console.log(chalk.yellowBright(`MongoDB connection established`));
 });
 
 const createMongooseConnection = () =>
-  mongoose
-    .connect(process.env.MONGO_DB_CONNECTION_STRING!, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    })
-    .catch(console.error);
+  mongoose.connect(config.database.mongoDbConnectionString, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+
+    // Connection options
+    connectTimeoutMS: 30000,
+    socketTimeoutMS: 30000,
+    autoReconnect: true
+  });
 
 export default createMongooseConnection;

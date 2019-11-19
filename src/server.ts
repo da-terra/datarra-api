@@ -2,16 +2,14 @@ import chalk from "chalk";
 import express, { Express } from "express";
 import cors from "cors";
 import compression from "compression";
-
-const port: string = (process as any).env.PORT;
-const corsWhitelist: string = (process as any).env.CORS_WHITELIST.split(",");
+import config from './config';
 
 export default (callback: Function) => {
   // Use compression middleware to gzip the response to limit data usage
   const compressionMiddleware = compression({});
 
   // Use cors middleware to allow cross origin requests from different origins
-  const corsMiddleware = cors({ origin: corsWhitelist });
+  const corsMiddleware = cors({ origin: config.server.corsWhitelist });
 
   // Create express instance
   const app: Express = express();
@@ -26,7 +24,7 @@ export default (callback: Function) => {
   callback(app);
 
   // Start listening to request on configured port
-  app.listen(port);
+  app.listen(config.server.port);
 
-  console.log(chalk.yellowBright(`Listening to port ${port}`));
+  console.log(chalk.yellowBright(`Listening to port ${config.server.port}`));
 };
