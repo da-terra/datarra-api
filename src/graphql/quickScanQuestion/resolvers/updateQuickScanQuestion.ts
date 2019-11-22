@@ -1,5 +1,4 @@
 import { BadRequest } from "http-errors";
-import Target from "../../../data/Target";
 
 type UpdateQuickScanQuestionsArguments = IQuickScanQuestion & { _id: string };
 

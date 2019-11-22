@@ -1,22 +1,22 @@
 import { Schema } from "mongoose";
-import Target from '../../../data/Target';
+import Target from "../../../data/Target";
 
 const QuickScanQuestion = new Schema({
   question: {
     type: String,
     unique: true,
-    index: true,
+    index: true
   },
-  target: Object.values(Target),
+  target: Number,
   body: String,
   minScore: Number,
   maxScore: Number,
   options: [
     {
       label: String,
-      score: Number,
+      score: Number
     }
-  ],
+  ]
 });
 
 export default QuickScanQuestion;

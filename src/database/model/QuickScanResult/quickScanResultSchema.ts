@@ -5,14 +5,14 @@ const QuickScanResult = new Schema({
     name: String,
     email: String,
     role: String,
-    phone: String,
+    phone: String
   },
   company: {
     companyName: String,
     website: String,
     sector: String,
     region: String,
-    employeeCount: Number,
+    employeeCount: Number
   },
   answer: [
     {

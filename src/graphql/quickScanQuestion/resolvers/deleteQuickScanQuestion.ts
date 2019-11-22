@@ -1,7 +1,5 @@
-import Target from "../../../data/Target";
-
 type DeleteQuickScanQuestionsArguments = {
-  _id: string
+  _id: string;
 };
 
 export default async (
@@ -12,5 +10,5 @@ export default async (
     deleteQuickScanQuestionsArguments
   );
 
-  return true
+  return true;
 };

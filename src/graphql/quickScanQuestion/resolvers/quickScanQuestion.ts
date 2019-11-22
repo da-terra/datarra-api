@@ -1,7 +1,7 @@
 import Target from "../../../data/Target";
 
 type QuickScanQuestionsArguments = {
-  target: Target
+  target: Target;
 };
 
 export default async (
