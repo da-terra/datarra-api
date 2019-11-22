@@ -2,7 +2,7 @@ import chalk from "chalk";
 import express, { Express } from "express";
 import cors from "cors";
 import compression from "compression";
-import config from './config';
+import config from "./config";
 
 export default (callback: Function) => {
   // Use compression middleware to gzip the response to limit data usage

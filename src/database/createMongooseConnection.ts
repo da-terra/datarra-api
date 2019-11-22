@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import mongoose from "mongoose";
-import config from '../config';
+import config from "../config";
 
 mongoose.connection.on("error", error => {
   console.error(chalk.redBright(`MongoDB connection error: ${error}`));
