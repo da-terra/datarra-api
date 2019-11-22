@@ -12,7 +12,7 @@ export const types = `
 `;
 
 export const queries = `
-  quickScanQuestions(target: Int): [QuickScanQuestion]!
+  quickScanQuestions(target: Int): [QuickScanQuestion!]!
 `;
 
 export const mutations = `
