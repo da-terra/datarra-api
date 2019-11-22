@@ -1,8 +1,11 @@
 export const types = `
   type QuickScanQuestion {
+    _id: String,
     question: String,
+    body: String,
     target: Int,
-    body: String
+    minScore: Int,
+    maxScore: Int,
   }
 
   input QuickScanQuestionOption {
