@@ -5,7 +5,7 @@ export const types = `
     body: String
   }
 
-  type QuickScanQuestionOption {
+  input QuickScanQuestionOption {
     label: String,
     score: Int
   }
