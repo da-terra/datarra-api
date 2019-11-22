@@ -4,6 +4,7 @@ export default (): MongooseModels => {
   return {
     Blog: mongooseModels.Blog(),
     Page: mongooseModels.Page(),
-    QuickScan: mongooseModels.QuickScan()
+    QuickScanQuestion: mongooseModels.QuickScanQuestion(),
+    QuickScanResult: mongooseModels.QuickScanResult(),
   };
 };

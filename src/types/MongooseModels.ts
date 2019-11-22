@@ -4,7 +4,8 @@ declare global {
   type MongooseModels = {
     Blog: Model<Document, {}>;
     Page: Model<Document, {}>;
-    QuickScan: Model<Document, {}>;
+    QuickScanQuestion: Model<Document, {}>;
+    QuickScanResult: Model<Document, {}>;
   };
 }
 
