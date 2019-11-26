@@ -10,8 +10,8 @@ declare global {
     question: String;
     target: Target;
     body: String;
-    minScore: Number;
-    maxScore: Number;
+    min: Number;
+    max: Number;
     options: IQuickScanQuestionOption[];
   };
 }

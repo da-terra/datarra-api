@@ -8,8 +8,8 @@ const QuickScanQuestion = new Schema({
   },
   target: Number,
   body: String,
-  minScore: Number,
-  maxScore: Number,
+  min: Number,
+  max: Number,
   options: [
     {
       label: String,

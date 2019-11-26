@@ -10,8 +10,8 @@ export const types = `
     question: String,
     body: String,
     target: Int,
-    minScore: Int,
-    maxScore: Int,
+    min: Int,
+    max: Int,
     options: [QuickScanQuestionOption!]
     salutation: String,
   }
@@ -31,8 +31,8 @@ export const mutations = `
     question: String,
     target: Int,
     body: String,
-    minScore: Int,
-    maxScore: Int,
+    min: Int,
+    max: Int,
     options: [QuickScanQuestionOptionInput]
     salutation: String,
   ): QuickScanQuestion
@@ -42,8 +42,8 @@ export const mutations = `
     question: String,
     target: Int,
     body: String,
-    minScore: Int,
-    maxScore: Int,
+    min: Int,
+    max: Int,
     options: [QuickScanQuestionOptionInput]
     salutation: String,
   ): QuickScanQuestion
