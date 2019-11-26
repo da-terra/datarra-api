@@ -1,6 +1,12 @@
 import { Schema } from "mongoose";
 
 const QuickScanResult = new Schema({
+  uuid: {
+    type: String,
+    unique: true,
+    index: true
+  },
+  target: Number,
   person: {
     name: String,
     email: String,

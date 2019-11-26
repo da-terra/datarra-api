@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { BadRequest } from "http-errors";
 
 type CreateQuickScanResultArguments = IQuickScanResult;
@@ -6,9 +7,13 @@ export default async (
   createQuickScanResultArguments: CreateQuickScanResultArguments,
   context: GraphQLContext
 ) => {
-  const result = await context.mongoose.QuickScanResult.create(
-    createQuickScanResultArguments
-  );
+  const uuid = crypto.randomBytes(64).toString("hex");
+
+  // Transform answers to valid type
+  const result = await context.mongoose.QuickScanResult.create({
+    ...createQuickScanResultArguments,
+    uuid
+  });
 
   if (!result) {
     throw new BadRequest();

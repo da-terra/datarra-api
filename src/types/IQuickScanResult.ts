@@ -1,7 +1,7 @@
-import Target from "../data/Target";
-
 declare global {
   type IQuickScanResult = {
+    uuid: string;
+    target: number;
     person: {
       name: string;
       email: string;
@@ -17,7 +17,7 @@ declare global {
     };
     answers: {
       questionId: string;
-      score: number;
+      value: number;
     }[];
     comment?: string;
   };
