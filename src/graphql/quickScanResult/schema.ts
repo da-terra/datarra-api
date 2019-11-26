@@ -55,6 +55,7 @@ export const queries = `
 
 export const mutations = `
   createQuickScanResult(
+    target: Int!
     company: QuickScanResultCompanyInput!
     person: QuickScanResultPersonInput!
     answers: [QuickScanResultAnswerInput!]!
