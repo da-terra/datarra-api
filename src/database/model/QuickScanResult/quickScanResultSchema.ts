@@ -14,10 +14,10 @@ const QuickScanResult = new Schema({
     region: String,
     employeeCount: Number
   },
-  answer: [
+  answers: [
     {
-      question: Schema.Types.ObjectId,
-      score: Number
+      questionId: Schema.Types.ObjectId,
+      value: Number
     }
   ],
   comment: String

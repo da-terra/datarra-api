@@ -1,11 +1,14 @@
 import { buildSchema } from "graphql";
-
 import {
   quickScanQuestionTypes,
   quickScanQuestionQueries,
   quickScanQuestionMutations
 } from "./quickScanQuestion";
-
+import {
+  quickScanResultTypes,
+  quickScanResultQueries,
+  quickScanResultMutations
+} from "./quickScanResult";
 import { pageTypes, pageQueries, pageMutations } from "./page";
 
 /**
@@ -16,14 +19,17 @@ import { pageTypes, pageQueries, pageMutations } from "./page";
 export default buildSchema(`
   ${pageTypes}
   ${quickScanQuestionTypes}
+  ${quickScanResultTypes}
 
   type Query {
     ${pageQueries}
     ${quickScanQuestionQueries}
+    ${quickScanResultQueries}
   }
 
   type Mutation {
     ${pageMutations}
     ${quickScanQuestionMutations}
+    ${quickScanResultMutations}
   }
 `);

@@ -5,8 +5,10 @@ export { default as createGraphQlContextMiddleware } from "./context";
 
 import pageResolvers from "./page";
 import quickScanQuestionResolvers from "./quickScanQuestion";
+import quickScanResultResolvers from "./quickScanResult";
 
 export const rootValue = {
   ...pageResolvers,
-  ...quickScanQuestionResolvers
+  ...quickScanQuestionResolvers,
+  ...quickScanResultResolvers
 };
