@@ -1,5 +1,4 @@
 import { Schema } from "mongoose";
-import Target from "../../../data/Target";
 
 const QuickScanQuestion = new Schema({
   question: {

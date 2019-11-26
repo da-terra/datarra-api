@@ -1,17 +1,29 @@
 export const types = `
-  type QuickScanResult {
-    name: String,
-    email: String,
-    role: String,
-    phone: String
-  }
-
-  type QuickScanResultCompany{
-    companyName: String,
+  type QuickScanResultCompany {
+    companyName: String!,
     website: String,
     sector: String,
     region: String,
     employeeCount: Int
+  }
+
+  type QuickScanResultPerson {
+    name: String!,
+    role: String!,
+    email: String!,
+    phone: String
+  }
+
+  type QuickScanResultAnswer { 
+    questionId: String!,
+    value: Float!
+  }
+
+  type QuickScanResult {
+    company: QuickScanResultCompany,
+    person: QuickScanResultPerson,
+    answers: [QuickScanResultAnswer!],
+    comment: String,
   }
 
   input QuickScanResultCompanyInput { 
@@ -24,15 +36,14 @@ export const types = `
 
   input QuickScanResultAnswerInput { 
     questionId: String!,
-    value: String!
+    value: Float!
   }
 
   input QuickScanResultPersonInput { 
     name: String!,
     role: String!,
     email: String!,
-    phone: String,
-    comment: String
+    phone: String
   }
 `;
 
@@ -42,9 +53,10 @@ export const queries = `
 
 export const mutations = `
   createQuickScanResult(
-    company: QuickScanResultCompanyInput!
-    person: QuickScanResultPersonInput!
-    answers: [QuickScanResultAnswerInput!]!
+    company: QuickScanResultCompanyInput!,
+    person: QuickScanResultPersonInput!,
+    answers: [QuickScanResultAnswerInput!]!,
+    comment: String
   ): QuickScanResult
 
   deleteQuickScanResult(_id: String!): Boolean

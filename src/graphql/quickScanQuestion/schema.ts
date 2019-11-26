@@ -1,5 +1,6 @@
 export const types = `
   type QuickScanQuestion {
+    _id: String,
     question: String,
     target: Int,
     body: String
