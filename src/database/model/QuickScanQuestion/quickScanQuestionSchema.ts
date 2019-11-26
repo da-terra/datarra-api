@@ -15,7 +15,8 @@ const QuickScanQuestion = new Schema({
       label: String,
       score: Number
     }
-  ]
+  ],
+  salutation: String
 });
 
 export default QuickScanQuestion;
