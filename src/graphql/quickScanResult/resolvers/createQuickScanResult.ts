@@ -6,8 +6,6 @@ export default async (
   createQuickScanResultArguments: CreateQuickScanResultArguments,
   context: GraphQLContext
 ) => {
-  console.log(createQuickScanResultArguments);
-  
   const result = await context.mongoose.QuickScanResult.create(
     createQuickScanResultArguments
   );

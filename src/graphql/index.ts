@@ -9,6 +9,6 @@ import quickScanResultResolvers from "./quickScanResult";
 
 export const rootValue = {
   ...pageResolvers,
-  ...quickScanQuestionResolvers
+  ...quickScanQuestionResolvers,
   ...quickScanResultResolvers
 };
