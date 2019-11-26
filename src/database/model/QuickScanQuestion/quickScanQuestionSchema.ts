@@ -1,5 +1,4 @@
 import { Schema } from "mongoose";
-import Target from "../../../data/Target";
 
 const QuickScanQuestion = new Schema({
   question: {
@@ -16,7 +15,8 @@ const QuickScanQuestion = new Schema({
       label: String,
       score: Number
     }
-  ]
+  ],
+  salutation: String
 });
 
 export default QuickScanQuestion;
