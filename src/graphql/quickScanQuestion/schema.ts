@@ -1,24 +1,24 @@
 export const types = `
   type QuickScanQuestionOption {
-    _id: String,
-    label: String,
-    score: Int
+    _id: String
+    label: String
+    score: Float
   }
 
   type QuickScanQuestion {
     _id: String,
-    question: String,
-    body: String,
-    target: Int,
-    min: Int,
-    max: Int,
+    question: String
+    body: String
+    target: Int
+    min: Float
+    max: Float
     options: [QuickScanQuestionOption!]
-    salutation: String,
+    salutation: String
   }
 
   input QuickScanQuestionOptionInput {
     label: String,
-    score: Int
+    score: Float
   }
 `;
 
@@ -28,13 +28,13 @@ export const queries = `
 
 export const mutations = `
   createQuickScanQuestion(
-    question: String,
-    target: Int,
-    body: String,
-    min: Int,
-    max: Int,
+    question: String
+    target: Int
+    body: String
+    min: Float
+    max: Float
     options: [QuickScanQuestionOptionInput]
-    salutation: String,
+    salutation: String
   ): QuickScanQuestion
 
   updateQuickScanQuestion(
@@ -42,8 +42,8 @@ export const mutations = `
     question: String,
     target: Int,
     body: String,
-    min: Int,
-    max: Int,
+    min: Float,
+    max: Float,
     options: [QuickScanQuestionOptionInput]
     salutation: String,
   ): QuickScanQuestion
