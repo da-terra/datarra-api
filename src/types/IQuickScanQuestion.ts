@@ -3,7 +3,7 @@ import Target from "../data/Target";
 declare global {
   type IQuickScanQuestionOption = {
     label: String;
-    score: Number;
+    value: Number;
   };
 
   type IQuickScanQuestion = {

@@ -13,7 +13,7 @@ const QuickScanQuestion = new Schema({
   options: [
     {
       label: String,
-      score: Number
+      value: Number
     }
   ],
   salutation: String

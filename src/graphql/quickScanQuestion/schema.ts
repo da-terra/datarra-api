@@ -2,7 +2,7 @@ export const types = `
   type QuickScanQuestionOption {
     _id: String
     label: String
-    score: Float
+    value: Float
   }
 
   type QuickScanQuestion {
@@ -18,7 +18,7 @@ export const types = `
 
   input QuickScanQuestionOptionInput {
     label: String,
-    score: Float
+    value: Float
   }
 `;
 
