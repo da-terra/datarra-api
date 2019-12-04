@@ -1,5 +1,5 @@
-import { NotFound } from "http-errors";
 import { GraphQLFieldResolver } from "graphql";
+import { ApolloError } from "apollo-server";
 
 type Arguments = {
   slug: string;
@@ -15,7 +15,7 @@ export default (async (parent, args, { dataSources }, info) => {
   );
 
   if (update.n < 1) {
-    throw new NotFound(`Page ${slug} not found`);
+    throw new ApolloError(`Page \`${slug}\` not found`, "NOT_FOUND");
   }
 
   const page = await dataSources.mongoose.Page.findOne({ slug });

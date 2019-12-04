@@ -1,4 +1,4 @@
-import { NotFound } from "http-errors";
+import { ApolloError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
 
 type Arguments = {
@@ -11,7 +11,7 @@ export default (async (parent, args, { dataSources }, info) => {
   const article = await dataSources.mongoose.Article.findOne({ slug });
 
   if (!article) {
-    throw new NotFound(`Article \`${slug}\` not found`);
+    throw new ApolloError(`Article \`${slug}\` not found`, "NOT_FOUND");
   }
 
   return article;
