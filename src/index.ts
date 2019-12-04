@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 // Main file that ties everthing together
 import { Express } from "express";
 

@@ -26,5 +26,6 @@ export default (callback: Function) => {
   // Start listening to request on configured port
   app.listen(config.server.port);
 
+  console.log(process.env.NODE_ENV);
   console.log(chalk.yellowBright(`Listening to port ${config.server.port}`));
 };
