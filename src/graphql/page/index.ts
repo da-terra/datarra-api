@@ -1,8 +1,19 @@
-export {
-  types as pageTypes,
-  queries as pageQueries,
-  mutations as pageMutations
-} from "./schema";
+import { loader } from "graphql.macro";
+import { page, createPage, updatePage } from "./resolvers";
 
-import * as resolvers from "./resolvers";
-export default resolvers;
+const typeDefs = loader("./page.graphql");
+
+const schemaModule: any = {
+  typeDefs,
+  resolvers: {
+    Query: {
+      page
+    },
+    Mutation: {
+      createPage,
+      updatePage
+    }
+  }
+};
+
+export default schemaModule;

@@ -1,20 +1,18 @@
 import { NotFound } from "http-errors";
+import { GraphQLFieldResolver } from "graphql";
 
-type PageArguments = {
-  name: string;
+type Arguments = {
+  slug: string;
 };
 
-export default async (
-  pageArguments: PageArguments,
-  context: GraphQLContext
-) => {
-  const { name } = pageArguments;
+export default (async (parent, args, { dataSources }, info) => {
+  const { slug } = args;
 
-  const page = await context.mongoose.Page.findOne({ name });
+  const page = await dataSources.mongoose.Page.findOne({ slug });
 
   if (!page) {
-    throw new NotFound(`Page \`${name}\` not found`);
+    throw new NotFound(`Page \`${slug}\` not found`);
   }
 
   return page;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

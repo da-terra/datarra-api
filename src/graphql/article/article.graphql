@@ -1,0 +1,65 @@
+extend type Image {
+  src: String!
+  alt: String!
+  fallbackColor: String!
+}
+
+extend type User {
+  fullName: String!
+  email: String!
+}
+
+extend type Article {
+  slug: String!
+  tags: Int!
+  category: Int!
+  image: Image!
+  author: User!
+  blocks: [String!]!
+  publishedDate: String!
+  updatedDate: String!
+  target: Int!
+  minScore: Float!
+  maxScore: Float!
+}
+
+input ArticleImageInput {
+  file: String!
+  alt: String!
+  fallbackColor: String
+}
+
+input ArticleUserInput {
+  fullName: String!
+  email: String!
+}
+
+input ArticleInput {
+  slug: String!
+  tags: Int!
+  category: Int!
+  image: ArticleImageInput!
+  author: ArticleUserInput!
+  blocks: [String!]!
+  publishedDate: String!
+  updatedDate: String!
+  target: Int!
+  minScore: Float!
+  maxScore: Float!
+}
+
+extend type Query {
+  article(slug: String): Article
+  articles(
+    target: Int
+    tags: [String!]
+    minScore: Float
+    maxScore: Float
+  ): [Article!]!
+  featuredArticle(target: Int!): Article
+}
+
+extend type Mutation {
+  createArticle(slug: String, blocks: [String!]!): Article
+  updateArticle(slug: String, blocks: [String!]!): Article
+}

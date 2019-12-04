@@ -1,14 +1,12 @@
 import { BadRequest, NotFound } from "http-errors";
+import { GraphQLFieldResolver } from "graphql";
 
-type UpdateQuickScanQuestionsArguments = IQuickScanQuestion & { _id: string };
+type Arguments = IQuickScanQuestion & { _id: string };
 
-export default async (
-  updateQuickScanQuestionsArguments: UpdateQuickScanQuestionsArguments,
-  context: GraphQLContext
-) => {
-  const { _id, ...newQuestionValues } = updateQuickScanQuestionsArguments;
+export default (async (parent, args, { dataSources }, info) => {
+  const { _id, ...newQuestionValues } = args;
 
-  const update = await context.mongoose.QuickScanQuestion.updateOne(
+  const update = await dataSources.mongoose.QuickScanQuestion.updateOne(
     { _id },
     newQuestionValues
   );
@@ -17,9 +15,9 @@ export default async (
     throw new NotFound(`QuickScanQuestion ${_id} not found`);
   }
 
-  const updatedQuestion = await context.mongoose.QuickScanQuestion.findOne({
+  const updatedQuestion = await dataSources.mongoose.QuickScanQuestion.findOne({
     _id
   });
 
   return updatedQuestion;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

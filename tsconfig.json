@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "none",
     "moduleResolution": "node",
+    "noImplicitAny": true,
     "outDir": "./build/app"
   },
   "include": ["src/**/*"]

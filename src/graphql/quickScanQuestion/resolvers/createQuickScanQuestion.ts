@@ -1,18 +1,14 @@
 import { BadRequest } from "http-errors";
+import { GraphQLFieldResolver } from "graphql";
 
-type CreateQuickScanQuestionsArguments = IQuickScanQuestion;
+type Arguments = IQuickScanQuestion;
 
-export default async (
-  createQuickScanQuestionsArguments: CreateQuickScanQuestionsArguments,
-  context: GraphQLContext
-) => {
-  const question = await context.mongoose.QuickScanQuestion.create(
-    createQuickScanQuestionsArguments
-  );
+export default (async (parent, args, { dataSources }, info) => {
+  const question = await dataSources.mongoose.QuickScanQuestion.create(args);
 
   if (!question) {
     throw new BadRequest();
   }
 
   return question;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

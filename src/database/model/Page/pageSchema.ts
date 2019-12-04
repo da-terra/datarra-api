@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 
 const pageSchema = new Schema({
-  name: {
+  slug: {
     type: String,
     unique: true,
     index: true

@@ -1,20 +1,16 @@
-import { NotFound } from 'http-errors';
+import { NotFound } from "http-errors";
+import { GraphQLFieldResolver } from "graphql";
 
-type QuickScanResultArguments = {
+type Arguments = {
   uuid: string;
 };
 
-export default async (
-  quickScanResultArguments: QuickScanResultArguments,
-  context: GraphQLContext
-) => {
-  const result = await context.mongoose.QuickScanResult.findOne(
-    quickScanResultArguments
-  );
+export default (async (parent, args, { dataSources }, info) => {
+  const result = await dataSources.mongoose.QuickScanResult.findOne(args);
 
-  if(!result) {
+  if (!result) {
     throw new NotFound("QuickScan profile not found");
   }
 
   return result;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

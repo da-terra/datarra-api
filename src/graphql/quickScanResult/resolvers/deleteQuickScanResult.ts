@@ -1,14 +1,11 @@
-type DeleteQuickScanResultArguments = {
+import { GraphQLFieldResolver } from "graphql";
+
+type Arguments = {
   _id: string;
 };
 
-export default async (
-  deleteQuickScanResultArguments: DeleteQuickScanResultArguments,
-  context: GraphQLContext
-) => {
-  await context.mongoose.QuickScanResult.deleteOne(
-    deleteQuickScanResultArguments
-  );
+export default (async (parent, args, { dataSources }, info) => {
+  await dataSources.mongoose.QuickScanResult.deleteOne(args);
 
   return true;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

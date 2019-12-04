@@ -6,10 +6,25 @@ const articleSchema = new Schema({
     unique: true,
     index: true
   },
+  image: {
+    src: String,
+    alt: String,
+    fallbackColor: String
+  },
+  author: {
+    fullName: String,
+    email: String
+  },
+  title: String,
+  description: String,
+  blocks: [String],
+  publishedDate: Date,
+  updatedDate: Date,
+  tags: Number,
+  category: Number,
   target: Number,
-  scoreRange: [],
-  tags: [String],
-  blocks: [String]
+  minScore: Number,
+  maxScore: Number
 });
 
 export default articleSchema;

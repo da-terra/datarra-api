@@ -1,20 +1,18 @@
 import { NotFound } from "http-errors";
+import { GraphQLFieldResolver } from "graphql";
 
 type Arguments = {
-  slug: string;
+  slug?: string;
 };
 
-export default async (
-  args: Arguments,
-  context: GraphQLContext
-) => {
+export default (async (parent, args, { dataSources }, info) => {
   const { slug } = args;
 
-  const article = await context.mongoose.Article.findOne({ slug });
+  const article = await dataSources.mongoose.Article.findOne({ slug });
 
   if (!article) {
     throw new NotFound(`Article \`${slug}\` not found`);
   }
 
   return article;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

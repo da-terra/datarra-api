@@ -1,17 +1,15 @@
 import crypto from "crypto";
 import { BadRequest } from "http-errors";
+import { GraphQLFieldResolver } from "graphql";
 
-type CreateQuickScanResultArguments = IQuickScanResult;
+type Arguments = IQuickScanResult;
 
-export default async (
-  createQuickScanResultArguments: CreateQuickScanResultArguments,
-  context: GraphQLContext
-) => {
+export default (async (parent, args, { dataSources }, info) => {
   const uuid = crypto.randomBytes(64).toString("hex");
 
   // Transform answers to valid type
-  const result = await context.mongoose.QuickScanResult.create({
-    ...createQuickScanResultArguments,
+  const result = await dataSources.mongoose.QuickScanResult.create({
+    ...args,
     uuid
   });
 
@@ -20,4 +18,4 @@ export default async (
   }
 
   return result;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

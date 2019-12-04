@@ -1,22 +1,18 @@
+import { GraphQLFieldResolver } from "graphql";
 import { NotFound } from "http-errors";
 
 type Arguments = {
   slug: string;
   target: number;
-  scoreRange: {
-    min: number;
-    max: number;
-  };
+  minScore: number;
+  maxScore: number;
   tags: string[];
   blocks: string[];
 };
 
-export default async (
-  args: Arguments,
-  context: GraphQLContext
-) => {
+export default (async (parent, args, { dataSources }, info) => {
   // Get page name from arguments
-  const update = await context.mongoose.Article.updateOne(
+  const update = await dataSources.mongoose.Article.updateOne(
     { slug: args.slug },
     args
   );
@@ -25,9 +21,9 @@ export default async (
     throw new NotFound(`Article ${args.slug} not found`);
   }
 
-  const article = await context.mongoose.Article.findOne({
+  const article = await dataSources.mongoose.Article.findOne({
     slug: args.slug
   });
 
   return article;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

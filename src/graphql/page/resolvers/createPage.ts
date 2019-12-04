@@ -1,23 +1,20 @@
 import { BadRequest } from "http-errors";
-import { Document } from "mongoose";
+import { GraphQLFieldResolver } from "graphql";
 
-type CreatePageArguments = {
-  name: string;
+type Arguments = {
+  slug: string;
   blocks: string;
 };
 
-export default async (
-  pageArguments: CreatePageArguments,
-  context: GraphQLContext
-) => {
+export default (async (parent, args, { dataSources }, info) => {
   // Get page name from arguments
-  const { name, blocks } = pageArguments;
+  const { slug, blocks } = args;
 
-  const page = await context.mongoose.Page.create({ name, blocks });
+  const page = await dataSources.mongoose.Page.create({ slug, blocks });
 
   if (!page) {
     throw new BadRequest();
   }
 
   return page;
-};
+}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;

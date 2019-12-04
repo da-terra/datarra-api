@@ -1,6 +1,8 @@
 declare global {
   type GraphQLContext = {
-    mongoose: MongooseModels;
+    dataSources: {
+      mongoose: MongooseModels;
+    };
   };
 }
 

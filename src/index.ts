@@ -2,27 +2,21 @@ import "dotenv/config";
 
 // Main file that ties everthing together
 import { Express } from "express";
-
-import { createMongooseConnection } from "./database";
-import {
-  schema,
-  rootValue,
-  createGraphQlContextMiddleware,
-  createGraphQlMiddleware
-} from "./graphql";
+import { ApolloServer } from "apollo-server-express";
+import { createMongooseConnection, MongooseDataSource } from "./database";
+import { schema } from "./graphql";
 import createServer from "./server";
 
 // Initiate database connection
 createMongooseConnection();
 
-// Setup graphQL
-const context = createGraphQlContextMiddleware();
-const graphQlMiddleware = createGraphQlMiddleware({
+const server = new ApolloServer({
   schema,
-  rootValue,
-  context
+  dataSources: () => ({
+    mongoose: new MongooseDataSource()
+  })
 });
 
-createServer((server: Express) => {
-  server.use("/graphql", graphQlMiddleware);
+createServer((app: Express) => {
+  server.applyMiddleware({ app });
 });

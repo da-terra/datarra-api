@@ -1,8 +1,23 @@
-export {
-  types as quickScanResultTypes,
-  queries as quickScanResultQueries,
-  mutations as quickScanResultMutations
-} from "./schema";
+import { loader } from "graphql.macro";
+import {
+  quickScanResult,
+  createQuickScanResult,
+  deleteQuickScanResult
+} from "./resolvers";
 
-import * as resolvers from "./resolvers";
-export default resolvers;
+const typeDefs = loader("./quickScanResult.graphql");
+
+const schemaModule: any = {
+  typeDefs,
+  resolvers: {
+    Query: {
+      quickScanResult
+    },
+    Mutation: {
+      createQuickScanResult,
+      deleteQuickScanResult
+    }
+  }
+};
+
+export default schemaModule;

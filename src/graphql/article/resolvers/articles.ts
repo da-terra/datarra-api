@@ -1,28 +1,22 @@
+import { GraphQLFieldResolver } from "graphql";
+
 type Arguments = {
   target: number;
-  scoreRange: {
-    min: number;
-    max: number;
-  };
   tags: string[];
+  minScore: number;
+  maxScore: number;
 };
 
-export default async (
-  args: Arguments,
-  context: GraphQLContext
-) => {
+export default (async (parent, args, { dataSources }, info) => {
   const { target } = args;
 
-  const query: any = {
-    $or: [],
-    $and: []
-  };
+  const query: any = {};
 
   if (target) {
     query.target = target;
   }
 
-  const articles = await context.mongoose.Article.find(query);
+  const articles = await dataSources.mongoose.Article.find(query);
 
   return articles;
-};
+}) as GraphQLFieldResolver<{}, GraphQLContext, Arguments>;
