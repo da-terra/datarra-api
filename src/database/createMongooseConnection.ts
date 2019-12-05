@@ -19,8 +19,7 @@ const createMongooseConnection = () =>
 
     // Connection options
     connectTimeoutMS: 30000,
-    socketTimeoutMS: 30000,
-    autoReconnect: true
+    socketTimeoutMS: 30000
   });
 
 export default createMongooseConnection;

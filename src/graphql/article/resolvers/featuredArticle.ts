@@ -2,14 +2,18 @@ import { ApolloError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
 
 type Arguments = {
-  slug?: string;
+  target?: number;
 };
 
 export default (async (parent, args, { dataSources }, info) => {
-  const article = await dataSources.mongoose.Article.findOne(args);
+  const { target } = args;
 
-  if (!article) {
-    throw new ApolloError(`Article \`${args.slug}\` not found`, "NOT_FOUND");
+  const article = await dataSources.mongoose.Article.findOne({
+    target
+  });
+
+  if (article == null) {
+    throw new ApolloError(`Article not found`, "NOT_FOUND");
   }
 
   return article;

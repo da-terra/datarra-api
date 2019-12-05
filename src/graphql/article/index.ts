@@ -4,6 +4,7 @@ import updateArticle from "./resolvers/updateArticle";
 import createArticle from "./resolvers/createArticle";
 import article from "./resolvers/article";
 import articles from "./resolvers/articles";
+import featuredArticle from "./resolvers/featuredArticle";
 
 const typeDefs = loader("./article.graphql");
 
@@ -12,7 +13,8 @@ const schemaModule: any = {
   resolvers: {
     Query: {
       article,
-      articles
+      articles,
+      featuredArticle
     },
     Mutation: {
       updateArticle,

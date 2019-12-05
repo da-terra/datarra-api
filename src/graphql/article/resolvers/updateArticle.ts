@@ -6,7 +6,7 @@ type Arguments = {
   target: number;
   minScore: number;
   maxScore: number;
-  tags: string[];
+  tags: number;
   blocks: string[];
 };
 
@@ -14,7 +14,12 @@ export default (async (parent, args, { dataSources }, info) => {
   // Get page name from arguments
   const update = await dataSources.mongoose.Article.updateOne(
     { slug: args.slug },
-    args
+    {
+      ...args,
+      $currentDate: {
+        updatedDate: true
+      }
+    }
   );
 
   if (update.n < 1) {

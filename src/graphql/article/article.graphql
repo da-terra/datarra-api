@@ -11,8 +11,9 @@ extend type User {
 
 extend type Article {
   slug: String!
+  title: String!
+  description: String!
   tags: Int!
-  category: Int!
   image: Image!
   author: User!
   blocks: [String!]!
@@ -24,7 +25,7 @@ extend type Article {
 }
 
 input ArticleImageInput {
-  file: String!
+  src: String!
   alt: String!
   fallbackColor: String
 }
@@ -36,13 +37,13 @@ input ArticleUserInput {
 
 input ArticleInput {
   slug: String!
+  title: String!
+  description: String!
   tags: Int!
-  category: Int!
   image: ArticleImageInput!
   author: ArticleUserInput!
   blocks: [String!]!
   publishedDate: String!
-  updatedDate: String!
   target: Int!
   minScore: Float!
   maxScore: Float!
@@ -52,7 +53,7 @@ extend type Query {
   article(slug: String): Article
   articles(
     target: Int
-    tags: [String!]
+    tags: Int
     minScore: Float
     maxScore: Float
   ): [Article!]!
@@ -60,6 +61,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  createArticle(slug: String, blocks: [String!]!): Article
-  updateArticle(slug: String, blocks: [String!]!): Article
+  createArticle(article: ArticleInput): Article
+  updateArticle(article: ArticleInput): Article
 }

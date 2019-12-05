@@ -1,7 +1,10 @@
+import { MongoDBDataSource, MongooseDataSource } from "../database";
+
 declare global {
   type GraphQLContext = {
     dataSources: {
-      mongoose: MongooseModels;
+      mongodb: MongoDBDataSource;
+      mongoose: MongooseDataSource;
     };
   };
 }

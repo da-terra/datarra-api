@@ -3,18 +3,34 @@ type AppSettings = {
     port: number;
     corsWhitelist: string[];
   };
-  port: number;
   database: {
     mongoDbConnectionString: string;
+    mongoDbName: string;
   };
 };
 
-export default {
+const config: AppSettings = {
   server: {
     port: parseInt(process.env.PORT!, 10),
     corsWhitelist: process.env.CORS_WHITELIST!.split(",")
   },
   database: {
-    mongoDbConnectionString: process.env.CUSTOMCONNSTR_MONGO_DB!
+    mongoDbConnectionString: process.env.CUSTOMCONNSTR_MONGO_DB!,
+    mongoDbName: process.env.MONGO_DB_NAME!
   }
-} as AppSettings;
+};
+
+/** Validate config on startup */
+if (config.database.mongoDbName == null) {
+  throw new Error("PORT environment variable is required");
+}
+
+if (config.database.mongoDbName == null) {
+  throw new Error("MONGO_DB_NAME environment variable is required");
+}
+
+if (config.database.mongoDbName == null) {
+  throw new Error("CUSTOMCONNSTR_MONGO_DB environment variable is required");
+}
+
+export default config;

@@ -10,13 +10,14 @@ type Arguments = {
 export default (async (parent, args, { dataSources }, info) => {
   const { target } = args;
 
-  const query: any = {};
+  const conditions: any = {};
 
   if (target) {
-    query.target = target;
+    // matches documents where any of the bit positions given by the query are set
+    conditions.target = { $eq: args.target };
   }
 
-  const articles = await dataSources.mongoose.Article.find(query);
+  const article = await dataSources.mongoose.Article.find(conditions);
 
-  return articles;
+  return article;
 }) as GraphQLFieldResolver<{}, GraphQLContext, Arguments>;

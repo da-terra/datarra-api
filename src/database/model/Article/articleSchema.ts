@@ -21,10 +21,10 @@ const articleSchema = new Schema({
   publishedDate: Date,
   updatedDate: Date,
   tags: Number,
-  category: Number,
   target: Number,
   minScore: Number,
-  maxScore: Number
+  maxScore: Number,
+  featured: Boolean
 });
 
 export default articleSchema;
