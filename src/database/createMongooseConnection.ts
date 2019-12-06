@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 import config from "../config";
 
 mongoose.connection.on("error", error => {
-  console.error(chalk.redBright(`MongoDB connection error: ${error}`));
+  console.error(chalk.redBright(`Mongoose client connection error: ${error}`));
 });
 
 mongoose.connection.once("open", () => {
-  console.log(chalk.yellowBright(`MongoDB connection established`));
+  console.log(chalk.yellowBright(`Mongoose client connection established`));
 });
 
 const createMongooseConnection = () =>
