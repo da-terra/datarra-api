@@ -23,6 +23,9 @@ export default (callback: Function) => {
   // Pass app to the callback to configure the business logic of our app on a different location
   callback(app);
 
+  // Static files
+  app.use(express.static("static"));
+
   // Start listening to request on configured port
   app.listen(config.server.port);
 
