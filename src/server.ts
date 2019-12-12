@@ -28,7 +28,7 @@ export default (callback: Function) => {
   app.use(express.static("static"));
 
   // Add security features to express server
-  // app.use(helmet());
+  app.use(helmet());
 
   // Start listening to request on configured port
   app.listen(config.server.port);
