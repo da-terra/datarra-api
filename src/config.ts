@@ -19,7 +19,7 @@ const config: AppSettings = {
 };
 
 if (config.database.mongoDbConnectionString == null) {
-  throw new Error("MONGO_DB_NAME environment variable is required");
+  throw new Error("CUSTOMCONNSTR_MONGO_DB environment variable is required");
 }
 
 export default config;

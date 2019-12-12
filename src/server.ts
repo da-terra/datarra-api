@@ -2,6 +2,7 @@ import chalk from "chalk";
 import express, { Express } from "express";
 import cors from "cors";
 import compression from "compression";
+import helmet from "helmet";
 import config from "./config";
 
 export default (callback: Function) => {
@@ -25,6 +26,9 @@ export default (callback: Function) => {
 
   // Static files
   app.use(express.static("static"));
+
+  // Add security features to express server
+  app.use(helmet());
 
   // Start listening to request on configured port
   app.listen(config.server.port);
