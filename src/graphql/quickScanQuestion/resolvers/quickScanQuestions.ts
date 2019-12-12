@@ -9,4 +9,4 @@ export default (async (parent, args, { dataSources }, info) => {
   const questions = await dataSources.mongoose.QuickScanQuestion.find(args);
 
   return questions;
-}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<any, IGraphQLContext, Arguments>;

@@ -8,4 +8,4 @@ export default (async (parent, args, { dataSources }, info) => {
   await dataSources.mongoose.QuickScanResult.deleteOne(args);
 
   return true;
-}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<any, IGraphQLContext, Arguments>;

@@ -3,8 +3,8 @@ import "dotenv/config";
 // Main file that ties everthing together
 import { Express } from "express";
 import { ApolloServer } from "apollo-server-express";
-import { createMongooseConnection, MongooseDataSource } from "./database";
-import { schema } from "./graphql";
+import { createMongooseConnection } from "./database";
+import { schema, dataSources, context } from "./graphql";
 import createServer from "./server";
 import config from "./config";
 
@@ -14,9 +14,8 @@ createMongooseConnection();
 createServer(async (app: Express) => {
   const apolloServer = new ApolloServer({
     schema,
-    dataSources: () => ({
-      mongoose: new MongooseDataSource()
-    })
+    dataSources,
+    context
   });
 
   apolloServer.applyMiddleware({

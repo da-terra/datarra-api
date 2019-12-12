@@ -11,4 +11,4 @@ export default (async (parent, args, { dataSources }, info) => {
   }
 
   return question;
-}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<any, IGraphQLContext, Arguments>;

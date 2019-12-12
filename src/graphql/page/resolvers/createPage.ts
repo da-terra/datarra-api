@@ -17,4 +17,4 @@ export default (async (parent, args, { dataSources }, info) => {
   }
 
   return page;
-}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<any, IGraphQLContext, Arguments>;

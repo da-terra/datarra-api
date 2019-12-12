@@ -21,4 +21,4 @@ export default (async (parent, args, { dataSources }, info) => {
   const page = await dataSources.mongoose.Page.findOne({ slug });
 
   return page;
-}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<any, IGraphQLContext, Arguments>;

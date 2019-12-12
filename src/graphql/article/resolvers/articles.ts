@@ -20,4 +20,4 @@ export default (async (parent, args, { dataSources }, info) => {
   const article = await dataSources.mongoose.Article.find(conditions);
 
   return article;
-}) as GraphQLFieldResolver<{}, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<{}, IGraphQLContext, Arguments>;

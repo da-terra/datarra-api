@@ -8,6 +8,8 @@ type Arguments = {
 export default (async (parent, args, { dataSources }, info) => {
   const { slug } = args;
 
+  console.log(dataSources);
+
   const page = await dataSources.mongoose.Page.findOne({ slug });
 
   if (!page) {
@@ -15,4 +17,4 @@ export default (async (parent, args, { dataSources }, info) => {
   }
 
   return page;
-}) as GraphQLFieldResolver<any, GraphQLContext, Arguments>;
+}) as GraphQLFieldResolver<any, IGraphQLContext, Arguments>;

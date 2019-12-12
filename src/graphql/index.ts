@@ -1,3 +1,6 @@
+export { default as dataSources } from "./dataSources";
+export { default as context } from "./context";
+
 import { buildFederatedSchema } from "@apollo/federation";
 
 import article from "./article";
