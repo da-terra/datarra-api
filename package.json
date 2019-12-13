@@ -26,6 +26,7 @@
     "@types/http-errors": "^1.6.2",
     "@types/mongoose": "^5.5.32",
     "@types/node": "^12.12.5",
+    "@types/send": "^0.14.5",
     "apollo-datasource": "^0.6.3",
     "apollo-server": "^2.9.12",
     "apollo-server-express": "^2.9.13",
@@ -46,6 +47,7 @@
     "mongoose": "^5.7.11",
     "nodemon": "^2.0.1",
     "prettier": "^1.18.2",
+    "send": "^0.17.1",
     "typescript": "^3.6.3"
   },
   "lint-staged": {

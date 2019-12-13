@@ -40,9 +40,9 @@ declare global {
     };
   };
 
-  interface IEmailProvider {
+  type IEmailProvider = {
     send(template: string, emailBodys: IEmailTemplate[]): Promise<any>;
-  }
+  };
 }
 
 export {};

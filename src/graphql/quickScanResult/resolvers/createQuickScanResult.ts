@@ -24,7 +24,9 @@ export default (async (parent, args, { dataSources, providers }, info) => {
     quickscanProfileUrl: createUrl(RoutePath.QuickScanProfile, { uuid })
   };
 
-  providers.email.send(EmailTemplates.CreateQuickscanResultTemplate, [email]);
+  await providers.email.send(EmailTemplates.CreateQuickscanResultTemplate, [
+    email
+  ]);
 
   if (!result) {
     throw new BadRequest();
