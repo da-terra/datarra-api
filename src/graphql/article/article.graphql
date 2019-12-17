@@ -61,6 +61,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  createArticle(article: ArticleInput): Article
-  updateArticle(article: ArticleInput): Article
+  # createArticle(article: ArticleInput): Article
+  # updateArticle(article: ArticleInput): Article
 }

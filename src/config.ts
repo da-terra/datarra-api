@@ -26,8 +26,8 @@ const config: AppSettings = {
     apiKey: process.env.SENDGRID_API_KEY!,
     config: {
       from: {
-        email: "contact@datascienceplatform.nl",
-        name: "Data Science Platform"
+        name: "Data Science Platform",
+        email: "no-reply@datascienceplatform.nl"
       },
       trackingSettings: {
         clickTracking: {

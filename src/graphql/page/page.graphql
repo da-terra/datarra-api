@@ -8,6 +8,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  createPage(slug: String, blocks: [String!]!): ContentPage
-  updatePage(slug: String, blocks: [String!]!): ContentPage
+  # createPage(slug: String, blocks: [String!]!): ContentPage
+  # updatePage(slug: String, blocks: [String!]!): ContentPage
 }

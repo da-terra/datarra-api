@@ -60,5 +60,5 @@ extend type Mutation {
     comment: String
   ): QuickScanResult
 
-  deleteQuickScanResult(_id: ID!): Boolean
+  # deleteQuickScanResult(_id: ID!): Boolean
 }
