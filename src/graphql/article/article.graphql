@@ -60,7 +60,7 @@ extend type Query {
   featuredArticle(target: Int!): Article
 }
 
-extend type Mutation {
-  # createArticle(article: ArticleInput): Article
-  # updateArticle(article: ArticleInput): Article
-}
+# extend type Mutation {
+#   createArticle(article: ArticleInput): Article
+#   updateArticle(article: ArticleInput): Article
+# }

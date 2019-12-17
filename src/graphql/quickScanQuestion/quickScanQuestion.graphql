@@ -24,27 +24,27 @@ extend type Query {
   quickScanQuestions(target: Int): [QuickScanQuestion!]!
 }
 
-extend type Mutation {
-  # createQuickScanQuestion(
-  #   question: String
-  #   target: Int
-  #   body: String
-  #   min: Float
-  #   max: Float
-  #   options: [QuickScanQuestionOptionInput]
-  #   salutation: String
-  # ): QuickScanQuestion
+# extend type Mutation {
+#   createQuickScanQuestion(
+#     question: String
+#     target: Int
+#     body: String
+#     min: Float
+#     max: Float
+#     options: [QuickScanQuestionOptionInput]
+#     salutation: String
+#   ): QuickScanQuestion
 
-  # updateQuickScanQuestion(
-  #   _id: ID!
-  #   question: String
-  #   target: Int
-  #   body: String
-  #   min: Float
-  #   max: Float
-  #   options: [QuickScanQuestionOptionInput]
-  #   salutation: String
-  # ): QuickScanQuestion
+#   updateQuickScanQuestion(
+#     _id: ID!
+#     question: String
+#     target: Int
+#     body: String
+#     min: Float
+#     max: Float
+#     options: [QuickScanQuestionOptionInput]
+#     salutation: String
+#   ): QuickScanQuestion
 
-  # deleteQuickScanQuestion(_id: String!): Boolean
-}
+#   deleteQuickScanQuestion(_id: String!): Boolean
+# }

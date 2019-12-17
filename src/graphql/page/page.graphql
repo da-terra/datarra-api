@@ -7,7 +7,7 @@ extend type Query {
   page(slug: String): ContentPage
 }
 
-extend type Mutation {
-  # createPage(slug: String, blocks: [String!]!): ContentPage
-  # updatePage(slug: String, blocks: [String!]!): ContentPage
-}
+# extend type Mutation {
+#   createPage(slug: String, blocks: [String!]!): ContentPage
+#   updatePage(slug: String, blocks: [String!]!): ContentPage
+# }
