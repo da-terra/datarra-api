@@ -2,6 +2,7 @@ import path from "path";
 import send from "send";
 import chalk from "chalk";
 import express, { Express } from "express";
+import serveStatic from "serve-static";
 import cors from "cors";
 import compression from "compression";
 import helmet from "helmet";
@@ -14,6 +15,10 @@ export default (callback: Function) => {
   // Use cors middleware to allow cross origin requests from different origins
   const corsMiddleware = cors({ origin: config.server.corsWhitelist });
 
+  // Create static middleware
+  const serveFile = serveStatic("static");
+
+  // Get working directory
   const cwd = process.cwd();
 
   // Create express instance
@@ -34,16 +39,19 @@ export default (callback: Function) => {
     })
   );
 
-  // Static files
-  app.use(express.static("static"));
-
-  // Always return index.html
+  // Always return index.html when the accept header includes `text/html`
   app.use((req, res, next) => {
     const acceptHtml =
       req.headers.accept && req.headers.accept.split(",").includes("text/html");
 
+    if (req.path.startsWith("/static")) {
+      res.set("Cache-Control", "max-age=31536000");
+    } else {
+      res.set("Cache-Control", "max-age=no-cache");
+    }
+
     if (!acceptHtml) {
-      next();
+      serveFile(req, res, next);
       return;
     }
 
