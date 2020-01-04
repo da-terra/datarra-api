@@ -73,3 +73,6 @@ typings/
 
 # production
 /build
+
+# IDE Configuration
+/.vscode

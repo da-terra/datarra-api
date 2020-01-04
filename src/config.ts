@@ -1,4 +1,7 @@
 type AppSettings = {
+  environment: {
+    isProduction: boolean;
+  };
   server: {
     origin: string;
     port: number;
@@ -11,19 +14,51 @@ type AppSettings = {
     apiKey: string;
     config: ISendGridConfig;
   };
+  passport: {
+    sessionSecret: string;
+    google: {
+      clientId: string;
+      clientSecret: string;
+      callbackURL: string;
+    };
+  };
 };
 
+enum EnvironmentVariable {
+  NodeEnv = "NODE_ENV",
+  Origin = "ORIGIN",
+  Port = "PORT",
+  CorsWhitelist = "CORS_WHITELIST",
+  MongoDbConnectString = "CUSTOMCONNSTR_MONGO_DB",
+  SendGridApiKey = "SENDGRID_API_KEY",
+  SessionSecret = "SESSION_SECRET",
+  GoogleClientId = "GOOGLE_CLIENT_ID",
+  GoogleClientSecret = "GOOGLE_CLIENT_SECRET",
+  GoogleClientCallbackUrl = "GOOGLE_CLIENT_CALLBACK_URL"
+}
+
+const getFromEnvironment = (key: EnvironmentVariable): string =>
+  process.env[key]!;
+
 const config: AppSettings = {
+  environment: {
+    isProduction:
+      getFromEnvironment(EnvironmentVariable.NodeEnv) === "production"
+  },
   server: {
-    origin: "https://www.datascienceplatform.nl",
-    port: parseInt(process.env.PORT!, 10),
-    corsWhitelist: process.env.CORS_WHITELIST!.split(",")
+    origin: getFromEnvironment(EnvironmentVariable.Origin),
+    port: parseInt(getFromEnvironment(EnvironmentVariable.Port), 10),
+    corsWhitelist: getFromEnvironment(EnvironmentVariable.CorsWhitelist).split(
+      ","
+    )
   },
   database: {
-    mongoDbConnectionString: process.env.CUSTOMCONNSTR_MONGO_DB!
+    mongoDbConnectionString: getFromEnvironment(
+      EnvironmentVariable.MongoDbConnectString
+    )!
   },
   sendGrid: {
-    apiKey: process.env.SENDGRID_API_KEY!,
+    apiKey: getFromEnvironment(EnvironmentVariable.SendGridApiKey),
     config: {
       from: {
         name: "Data Science Platform",
@@ -44,15 +79,28 @@ const config: AppSettings = {
         }
       }
     }
+  },
+  passport: {
+    sessionSecret: getFromEnvironment(EnvironmentVariable.SessionSecret),
+    google: {
+      clientId: getFromEnvironment(EnvironmentVariable.GoogleClientId),
+      clientSecret: getFromEnvironment(EnvironmentVariable.GoogleClientSecret),
+      callbackURL: getFromEnvironment(
+        EnvironmentVariable.GoogleClientCallbackUrl
+      )
+    }
   }
 };
 
-if (config.database.mongoDbConnectionString == null) {
-  throw new Error("CUSTOMCONNSTR_MONGO_DB environment variable is required");
-}
+/**
+ * Validate all environment variables
+ */
+Object.values(EnvironmentVariable).forEach(key => {
+  if (getFromEnvironment(key) != null) {
+    return;
+  }
 
-if (config.sendGrid.apiKey == null) {
-  throw new Error("SENDGRID_API_KEY environment variable is required");
-}
+  throw new Error(`${key} environment variable is required`);
+});
 
 export default config;

@@ -1,13 +1,13 @@
-import { MongooseDataSource } from "../graphql/dataSources";
+import { IUser } from "@data-science-platform/shared";
 
 declare global {
   type IGraphQLContext = {
-    providers: {
+    provider: {
+      storage: IStorageProvider;
       email: IEmailProvider;
     };
-    dataSources: {
-      mongoose: MongooseDataSource;
-    };
+    model: IModels;
+    user?: IUser;
   };
 }
 

@@ -7,7 +7,13 @@ mongoose.connection.on("error", error => {
 });
 
 mongoose.connection.once("open", () => {
-  console.log(chalk.yellowBright(`Mongoose client connection established`));
+  const connectionString = chalk.underline(
+    chalk.blue(config.database.mongoDbConnectionString)
+  );
+
+  const message = chalk.yellowBright(`Mongoose client connection established`);
+
+  console.log("\n\t", message, connectionString);
 });
 
 const createMongooseConnection = () =>

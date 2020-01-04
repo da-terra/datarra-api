@@ -1,0 +1,57 @@
+scalar Date
+
+# RichText type - Versioned JSON string generated via Slate.JS
+type RichText {
+  id: ID!
+  nodes: String!
+  createdDate: Date!
+}
+
+input RichTextInput {
+  nodes: String!
+}
+
+# Activity type
+type Activity {
+  id: ID!
+  resolver: String! # Name of the mutation resolver that handled the action
+  message: String # Message to clarify what the action entails
+  user: User! # Reference to the User that incurred the action
+  createdDate: Date!
+}
+
+# File type
+type File {
+  id: ID!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
+
+# Location type
+type Location {
+  id: ID!
+  address: String!
+  city: String!
+  country: String!
+}
+
+input LocationInput {
+  address: String!
+  city: String!
+  country: String!
+}
+
+# Image type
+type Image {
+  id: ID!
+  src: String!
+  alt: String!
+  fallbackColor: String!
+}
+
+input ImageInput {
+  src: ID # Reference to a File type
+  alt: String
+  fallbackColor: String
+}
