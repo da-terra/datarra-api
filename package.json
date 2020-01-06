@@ -30,6 +30,7 @@
     "@types/express-session": "^1.15.16",
     "@types/helmet": "0.0.45",
     "@types/http-errors": "^1.6.2",
+    "@types/jest": "24.0.18",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/mongoose": "^5.5.32",
     "@types/node": "^12.12.5",
@@ -59,9 +60,9 @@
     "graphql.macro": "^1.4.2",
     "helmet": "^3.21.2",
     "http-errors": "^1.7.3",
-    "husky": "^3.0.9",
+    "husky": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
-    "lint-staged": "^9.2.5",
+    "lint-staged": "^9.5.0",
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.11",
     "nodemon": "^2.0.1",
@@ -73,7 +74,12 @@
     "uuid": "^3.3.3"
   },
   "lint-staged": {
-    "*.(tsx?|json)": [
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,md}": [
       "prettier --write",
       "git add"
     ]
@@ -86,5 +92,10 @@
   "bugs": {
     "url": "https://github.com/da-terra/daterra-api/issues"
   },
-  "homepage": "https://github.com/da-terra/daterra-api#readme"
+  "homepage": "https://github.com/da-terra/daterra-api#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
