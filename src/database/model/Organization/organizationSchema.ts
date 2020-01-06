@@ -1,5 +1,4 @@
-import { Schema } from "mongoose";
-import { imageSchema, createSchema } from "../shared";
+import { createSchema, imageSchema } from "../shared";
 
 const organizationSchema = createSchema({
   name: String,

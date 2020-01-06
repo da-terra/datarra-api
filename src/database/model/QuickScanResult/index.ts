@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
-import quickScanResultSchema from "./quickScanResultSchema";
+import { Resource } from "@data-science-platform/shared";
+import mongoose, { Document, Model } from "mongoose";
+import quickscanResultSchema from "./quickscanResultSchema";
 
-export default () => mongoose.model("QuickScanResult", quickScanResultSchema);
+export default (): Model<Document, {}> =>
+  mongoose.model(Resource.QuickscanResult, quickscanResultSchema);

@@ -1,10 +1,10 @@
+import { createSchema } from "../shared";
 import { Schema } from "mongoose";
 
-const QuickScanResult = new Schema({
+const QuickscanResult = createSchema({
   uuid: {
     type: String,
-    unique: true,
-    index: true
+    unique: true
   },
   target: Number,
   person: {
@@ -29,4 +29,4 @@ const QuickScanResult = new Schema({
   comment: String
 });
 
-export default QuickScanResult;
+export default QuickscanResult;

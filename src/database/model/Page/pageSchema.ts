@@ -1,12 +1,12 @@
-import { Schema } from "mongoose";
+import { createSchema, richTextSchema } from "../shared";
 
-const pageSchema = new Schema({
+const pageSchema = createSchema({
   slug: {
     type: String,
     unique: true,
     index: true
   },
-  blocks: [String]
+  richText: richTextSchema
 });
 
 export default pageSchema;

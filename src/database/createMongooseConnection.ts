@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 import config from "../config";
 
 mongoose.connection.on("error", error => {
@@ -16,7 +16,7 @@ mongoose.connection.once("open", () => {
   console.log("\n\t", message, connectionString);
 });
 
-const createMongooseConnection = () =>
+const createMongooseConnection = (): Promise<Mongoose> =>
   mongoose.connect(config.database.mongoDbConnectionString, {
     useNewUrlParser: true,
     useFindAndModify: false,

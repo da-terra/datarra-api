@@ -1,10 +1,9 @@
-import { Schema } from "mongoose";
+import { createSchema } from "../shared";
 
-const QuickScanQuestion = new Schema({
+const QuickscanQuestion = createSchema({
   question: {
     type: String,
-    unique: true,
-    index: true
+    unique: true
   },
   target: Number,
   body: String,
@@ -19,4 +18,4 @@ const QuickScanQuestion = new Schema({
   salutation: String
 });
 
-export default QuickScanQuestion;
+export default QuickscanQuestion;

@@ -1,6 +1,6 @@
 import { Resource } from "@data-science-platform/shared";
 import mongoose, { Document, Model } from "mongoose";
-import articleSchema from "./articleSchema";
+import projectSchema from "./projectSchema";
 
 export default (): Model<Document, {}> =>
-  mongoose.model(Resource.Article, articleSchema);
+  mongoose.model(Resource.Project, projectSchema);

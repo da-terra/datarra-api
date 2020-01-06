@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+import { Resource } from "@data-science-platform/shared";
+import mongoose, { Document, Model } from "mongoose";
 import userSchema from "./userSchema";
 
-export default () => mongoose.model("User", userSchema);
+export default (): Model<Document, {}> =>
+  mongoose.model(Resource.User, userSchema);

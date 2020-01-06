@@ -1,30 +1,24 @@
-import { Schema } from "mongoose";
+import { ArticleState } from "@data-science-platform/shared";
+import { createSchema, imageSchema, richTextSchema } from "../shared";
 
-const articleSchema = new Schema({
+const articleSchema = createSchema({
   slug: {
     type: String,
-    unique: true,
-    index: true
-  },
-  image: {
-    src: String,
-    alt: String,
-    fallbackColor: String
-  },
-  author: {
-    fullName: String,
-    email: String
+    unique: true
   },
   title: String,
   description: String,
-  blocks: [String],
-  publishedDate: Date,
-  updatedDate: Date,
-  tags: Number,
-  target: Number,
-  minScore: Number,
-  maxScore: Number,
-  featured: Boolean
+  image: imageSchema,
+  author: String, // Reference to a User
+  richText: richTextSchema,
+  status: {
+    type: Number,
+    default: ArticleState.None
+  },
+  publishDate: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 export default articleSchema;
