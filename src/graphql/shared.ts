@@ -10,13 +10,13 @@ export default {
     Date: new GraphQLScalarType({
       name: "Date",
       description: "Date scalar type",
-      parseValue(value) {
+      parseValue(value): Date {
         return new Date(value); // value from the client
       },
-      serialize(value) {
+      serialize(value): string {
         return value.getTime(); // value sent to the client
       },
-      parseLiteral(ast) {
+      parseLiteral(ast): Date | null {
         if (ast.kind === Kind.INT) {
           return new Date(ast.value); // ast value is always in string format
         }

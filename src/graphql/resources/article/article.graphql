@@ -1,0 +1,43 @@
+type Article {
+  slug: String!
+  title: String!
+  description: String!
+  image: Image!
+  author: User
+  richText(limit: Int): [RichText!]!
+  activity(limit: Int): [Activity!]!
+  status: Int!
+  publishDate: Date!
+}
+
+input CreateArticleInput {
+  slug: String!
+  title: String!
+  description: String!
+  image: ImageInput!
+  author: ID
+  richText: RichTextInput!
+  status: Int
+  publishDate: Date
+}
+
+input UpdateArticleInput {
+  slug: String
+  title: String
+  description: String
+  image: ImageInput
+  richText: RichTextInput
+  status: Int
+  publishDate: Date
+}
+
+type Query {
+  article(slug: String!): Article!
+  articles: [Article!]!
+  featuredArticle(target: Int!): Article!
+}
+
+type Mutation {
+  createArticle(article: CreateArticleInput!): Article!
+  updateArticle(slug: String!, article: UpdateArticleInput!): Article!
+}

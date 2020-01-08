@@ -1,23 +1,22 @@
 import sendgrid from "@sendgrid/mail";
+import config from "../config";
 
-class SendGridProvider implements IEmailProvider {
-  config: ISendGridConfig;
-
-  constructor(apiKey: string, config: ISendGridConfig) {
-    sendgrid.setApiKey(apiKey);
-
-    this.config = config;
+class SendGridProvider implements EmailProvider {
+  constructor() {
+    sendgrid.setApiKey(config.sendGrid.apiKey);
   }
 
-  async send(template: string, emails: IEmailTemplate[]) {
+  async send(template: string, emails: EmailTemplate[]): Promise<void> {
     const messages = emails.map(email => ({
+      ...config.sendGrid.config,
       ...email,
-      ...this.config,
       templateId: template,
+
+      // eslint-disable-next-line
       dynamic_template_data: email
     }));
 
-    return sendgrid.send(messages);
+    await sendgrid.send(messages);
   }
 }
 

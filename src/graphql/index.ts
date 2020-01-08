@@ -1,29 +1,45 @@
-import { loader } from "graphql.macro";
-import { buildFederatedSchema } from "@apollo/federation";
-
-//
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Resource } from "@data-science-platform/shared";
+import directives from "./directives";
+import activity from "./resources/activity";
+import article from "./resources/article";
+import event from "./resources/event";
+import file from "./resources/file";
+import organization from "./resources/organization";
+import page from "./resources/page";
+import project from "./resources/project";
+import projectState from "./resources/projectState";
+import quickscanQuestion from "./resources/quickscanQuestion";
+import quickscanResult from "./resources/quickscanResult";
+import user from "./resources/user";
 import shared from "./shared";
+import { makeExecutableSchema, mergeSchemas } from "apollo-server";
+import { DocumentNode } from "graphql";
 
-//
-import article from "./article";
-import event from "./event";
-import organization from "./organization";
-import page from "./page";
-import project from "./project";
-import quickscanQuestion from "./quickscanQuestion";
-import quickscanResult from "./quickscanResult";
-import user from "./user";
+export const plugins = [];
 
-export const schema = buildFederatedSchema([
+const resourceSchemas: {
+  [name in Resource]: { typeDefs: DocumentNode; resolvers: any };
+} = {
+  File: file,
+  Organization: organization,
+  User: user,
+  Page: page,
+  Project: project,
+  ProjectState: projectState,
+  Activity: activity,
+  Article: article,
+  Event: event,
+  QuickscanQuestion: quickscanQuestion,
+  QuickscanResult: quickscanResult
+};
+
+const executableSchemas = [
   shared,
+  directives,
+  ...Object.values(resourceSchemas)
+].map(schema => makeExecutableSchema(schema));
 
-  // models
-  article,
-  event,
-  organization,
-  page,
-  project,
-  quickscanQuestion,
-  quickscanResult,
-  user
-]);
+export const schema = mergeSchemas({
+  schemas: executableSchemas
+});

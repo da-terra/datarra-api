@@ -1,0 +1,65 @@
+type QuickscanResultCompany {
+  companyName: String!
+  website: String
+  sector: String
+  region: String
+  employeeCount: Int
+}
+
+type QuickscanResultPerson {
+  name: String!
+  role: String!
+  email: String!
+  phone: String
+}
+
+type QuickscanResultAnswer {
+  questionId: String!
+  value: Float!
+}
+
+type QuickscanResult {
+  uuid: ID!
+  target: Int!
+  company: QuickscanResultCompany!
+  person: QuickscanResultPerson!
+  answers: [QuickscanResultAnswer!]!
+  comment: String
+  activity(limit: Int): [Activity!]!
+}
+
+input QuickscanResultCompanyInput {
+  companyName: String!
+  website: String
+  sector: String
+  region: String
+  employeeCount: Int
+}
+
+input QuickscanResultAnswerInput {
+  questionId: ID!
+  value: Float!
+}
+
+input QuickscanResultPersonInput {
+  name: String!
+  role: String!
+  email: String!
+  phone: String
+}
+
+type Query {
+  quickscanResult(uuid: String!): QuickscanResult
+}
+
+type Mutation {
+  createQuickscanResult(
+    target: Int!
+    company: QuickscanResultCompanyInput!
+    person: QuickscanResultPersonInput!
+    answers: [QuickscanResultAnswerInput!]!
+    comment: String
+  ): QuickscanResult
+
+  deleteQuickscanResult(id: ID!): Boolean
+}

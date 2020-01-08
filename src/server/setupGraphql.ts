@@ -1,25 +1,28 @@
-import { Express } from "express";
+import { IUser } from "@data-science-platform/shared";
 import { ApolloServer } from "apollo-server-express";
-import { schema } from "../graphql";
-import SendGridProvider from "../lib/SendGridProvider";
+import { Express } from "express";
 import config from "../config";
+import { plugins, schema } from "../graphql";
+import AzureBlobStorage from "../lib/AzureBlobStorage";
+import SendGridProvider from "../lib/SendGridProvider";
 
-const setupGraphQL = (app: Express, models: IModels) => {
-  const context: IGraphQLContext = {
+const setupGraphQL = (app: Express, models: Models): void => {
+  const context: GraphQLContext = {
     provider: {
-      email: new SendGridProvider(
-        config.sendGrid.apiKey,
-        config.sendGrid.config
-      )
+      email: new SendGridProvider(),
+      storage: new AzureBlobStorage()
     },
-    model: models
+    model: models,
+    user: (undefined as unknown) as IUser
   };
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req }) => ({
+    plugins,
+
+    context: ({ req }): GraphQLContext => ({
       ...context,
-      user: req.user
+      user: req.user as IUser
     }),
 
     // We need to resend credentials every request back to the server

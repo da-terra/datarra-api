@@ -1,0 +1,51 @@
+type QuickscanQuestionOption {
+  id: ID
+  label: String
+  value: Float
+}
+
+type QuickscanQuestion {
+  id: ID
+  question: String
+  body: String
+  target: Int
+  min: Float
+  max: Float
+  options: [QuickscanQuestionOption!]
+  salutation: String
+  activity(limit: Int): [Activity!]!
+}
+
+input QuickscanQuestionOptionInput {
+  label: String
+  value: Float
+}
+
+type Query {
+  quickscanQuestions(target: Int): [QuickscanQuestion!]!
+}
+
+type Mutation {
+  createQuickscanQuestion(
+    question: String
+    target: Int
+    body: String
+    min: Float
+    max: Float
+    options: [QuickscanQuestionOptionInput]
+    salutation: String
+  ): QuickscanQuestion
+
+  updateQuickscanQuestion(
+    id: ID!
+    question: String
+    target: Int
+    body: String
+    min: Float
+    max: Float
+    options: [QuickscanQuestionOptionInput]
+    salutation: String
+  ): QuickscanQuestion
+
+  deleteQuickscanQuestion(id: String!): Boolean
+}

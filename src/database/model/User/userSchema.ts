@@ -25,7 +25,10 @@ const userSchema = createSchema({
    * Custom properties - Not part of OAuth2 standard
    */
   organizations: [String],
-  role: Number
+  role: {
+    type: Number,
+    default: null
+  }
 });
 
 userSchema.index({

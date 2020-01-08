@@ -1,0 +1,27 @@
+type Event {
+  slug: String!
+  color: String!
+  title: String!
+  startDate: Date!
+  richText(limit: Int): [RichText!]!
+  activity(limit: Int): [Activity!]!
+}
+
+input EventInput {
+  slug: String!
+  color: String!
+  title: String!
+  startDate: Date!
+  richText: RichTextInput
+}
+
+type Query {
+  event(slug: String): Event
+  events: [Event!]!
+}
+
+type Mutation {
+  createEvent(event: EventInput): Event!
+  updateEvent(event: EventInput): Event!
+  deleteEvent(slug: String): Event!
+}

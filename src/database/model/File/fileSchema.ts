@@ -7,7 +7,11 @@ const fileSchema = createSchema({
   },
   filename: String,
   mimetype: String,
-  encoding: String
+  encoding: String,
+  createdDate: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 fileSchema.index({

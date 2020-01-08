@@ -1,23 +1,27 @@
-import article from "../database/model/Article";
-import event from "../database/model/Event";
-import page from "../database/model/Page";
-import project from "../database/model/Project";
-import quickscanQuestion from "../database/model/QuickscanQuestion";
-import quickscanResult from "../database/model/QuickscanResult";
-import user from "../database/model/User";
-import organization from "../database/model/Organization";
+import createActivityModel from "../database/model/Activity";
+import createArticleModel from "../database/model/Article";
+import createEventModel from "../database/model/Event";
+import createFileModel from "../database/model/File";
+import createOrganizationModel from "../database/model/Organization";
+import createPageModel from "../database/model/Page";
+import createProjectModel from "../database/model/Project";
+import createProjectState from "../database/model/ProjectState";
+import createQuickscanQuestion from "../database/model/QuickscanQuestion";
+import createQuickscanResult from "../database/model/QuickscanResult";
+import createUserModel from "../database/model/User";
 
-const setupModels = (): IModels => {
-  return {
-    article: article(),
-    event: event(),
-    organization: organization(),
-    page: page(),
-    project: project(),
-    quickscanQuestion: quickscanQuestion(),
-    quickscanResult: quickscanResult(),
-    user: user()
-  };
-};
+const setupModels = (): Models => ({
+  Activity: createActivityModel(),
+  Article: createArticleModel(),
+  Event: createEventModel(),
+  File: createFileModel(),
+  Organization: createOrganizationModel(),
+  Page: createPageModel(),
+  Project: createProjectModel(),
+  ProjectState: createProjectState(),
+  QuickscanQuestion: createQuickscanQuestion(),
+  QuickscanResult: createQuickscanResult(),
+  User: createUserModel()
+});
 
 export default setupModels;

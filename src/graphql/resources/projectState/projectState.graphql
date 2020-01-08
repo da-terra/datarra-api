@@ -1,0 +1,37 @@
+type ProjectState {
+  id: String!
+
+  name: String!
+  color: String!
+  nextState: ProjectState
+  rollbackState: ProjectState
+
+  activity: [Activity!]!
+}
+
+input CreateProjectStateInput {
+  name: String!
+  color: String!
+  nextState: String
+  rollbackState: String
+}
+
+input UpdateProjectStateInput {
+  name: String
+  color: String
+  nextState: String
+  rollbackState: String
+}
+
+type Query {
+  projectStates: [ProjectState!]!
+}
+
+type Mutation {
+  createProjectState(projectState: CreateProjectStateInput!): ProjectState!
+  updateProjectState(
+    id: String!
+    projectState: UpdateProjectStateInput!
+  ): ProjectState!
+  deleteProjectState(id: String!): Boolean!
+}

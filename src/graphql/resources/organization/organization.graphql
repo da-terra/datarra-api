@@ -1,0 +1,32 @@
+type Organization @model(name: "Organization") {
+  id: String!
+  name: String!
+  image: Image
+  locations: [Location!]
+  activity(limit: Int): [Activity!]!
+}
+
+input CreateOrganizationInput {
+  name: String!
+  image: ImageInput
+  locations: [LocationInput!]
+}
+
+input UpdateOrganizationInput {
+  name: String
+  image: ImageInput
+  locations: [LocationInput!]
+}
+
+type Query {
+  organization(id: ID!): Organization!
+  organizations: [Organization!]!
+}
+
+type Mutation {
+  createOrganization(organization: CreateOrganizationInput!): Organization!
+  updateOrganization(
+    id: ID!
+    organization: UpdateOrganizationInput!
+  ): Organization!
+}

@@ -3,7 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import config from "../config";
 
-const setupSecurityMeasures = (app: Express) => {
+const setupSecurityMeasures = (app: Express): void => {
   // Use cors middleware to allow cross origin requests from different origins
   const corsMiddleware = cors({
     origin: config.server.corsWhitelist,

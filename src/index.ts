@@ -7,4 +7,5 @@ import createServer from "./server";
 // Initiate database connection
 createMongooseConnection();
 
+// Initialize server
 createServer();

@@ -12,7 +12,7 @@ type AppSettings = {
   };
   sendGrid: {
     apiKey: string;
-    config: ISendGridConfig;
+    config: SendGridConfig;
   };
   passport: {
     sessionSecret: string;
@@ -38,7 +38,7 @@ enum EnvironmentVariable {
 }
 
 const getFromEnvironment = (key: EnvironmentVariable): string =>
-  process.env[key]!;
+  process.env[key] as string;
 
 const config: AppSettings = {
   environment: {
@@ -55,7 +55,7 @@ const config: AppSettings = {
   database: {
     mongoDbConnectionString: getFromEnvironment(
       EnvironmentVariable.MongoDbConnectString
-    )!
+    )
   },
   sendGrid: {
     apiKey: getFromEnvironment(EnvironmentVariable.SendGridApiKey),

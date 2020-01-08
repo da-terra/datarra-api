@@ -1,0 +1,14 @@
+type ContentPage {
+  slug: String!
+  richText(limit: Int): [RichText!]!
+  activity(limit: Int): [Activity!]!
+}
+
+type Query {
+  page(slug: String!): ContentPage
+}
+
+type Mutation {
+  createPage(slug: String, blocks: [String!]!): ContentPage
+  updatePage(slug: String, blocks: [String!]!): ContentPage
+}

@@ -7,7 +7,7 @@ import setupSecurityMeasures from "./setupSecurityMeasures";
 import setupPassport from "./passport";
 import config from "../config";
 
-export default () => {
+export default (): void => {
   const app = express();
   const models = setupModels();
 

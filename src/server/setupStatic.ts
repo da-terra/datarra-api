@@ -2,7 +2,7 @@ import path from "path";
 import send from "send";
 import express, { Express } from "express";
 
-const setupStatic = (app: Express) => {
+const setupStatic = (app: Express): void => {
   const cwd = process.cwd();
 
   // Serve static files

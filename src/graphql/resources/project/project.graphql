@@ -1,0 +1,50 @@
+type ProjectDuration {
+  startDate: Date
+  endDate: Date
+}
+
+type Project {
+  shortName: ID!
+  title: String!
+  organizations: [Organization!]!
+  team: [User!]!
+  duration: ProjectDuration
+  richText(limit: Int): [RichText!]!
+  activity(limit: Int): [Activity!]!
+  lastActivityDate: Date
+}
+
+input ProjectDurationInput {
+  startDate: Date
+  endDate: Date
+}
+
+input CreateProjectInput {
+  shortName: ID!
+  title: String!
+  organizations: [ID!]!
+  body: String
+  duration: ProjectDurationInput
+}
+
+input UpdateProjectInput {
+  shortName: ID
+  title: String
+  organizations: [ID!]
+  body: String
+  duration: ProjectDurationInput
+}
+
+type Query {
+  project(shortName: ID!): Project!
+  projects(userOnly: Boolean): [Project!]!
+}
+
+type Mutation {
+  createProject(project: CreateProjectInput!): Project!
+  updateProject(shortName: String!, project: UpdateProjectInput!): Project!
+  deleteProject(shortName: String!): Boolean!
+
+  addTeamMembers(users: [String!]!): Project!
+  removeTeamMembers(users: [String!]!): Project!
+}

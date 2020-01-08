@@ -1,0 +1,12 @@
+type Activity {
+  id: ID!
+  target: ID!
+  event: String! # Name of the mutation resolver that handled the action
+  data: String! # JSON string with data about the action
+  user: User! # Reference to the User that incurred the action
+  createdDate: Date!
+}
+
+type Query {
+  activities(me: Boolean, users: [String!]): [Activity!]!
+}
