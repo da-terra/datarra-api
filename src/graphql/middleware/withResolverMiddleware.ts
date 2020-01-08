@@ -1,6 +1,7 @@
 import { GraphQLFieldResolver, GraphQLResolveInfo } from "graphql";
 
 export type GraphQLMiddleware<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TSource = any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TArgs = { [argName: string]: any }

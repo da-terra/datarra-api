@@ -7,6 +7,7 @@
     "build": "babel src --extensions \".ts\" --out-dir build",
     "serve": "node build/index.js",
     "prettier": "prettier --write \"./**/*.ts\"",
+    "lint": "eslint ./**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
@@ -38,8 +39,8 @@
     "@types/passport-google-oauth20": "^2.0.3",
     "@types/send": "^0.14.5",
     "@types/uuid": "^3.4.6",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
     "apollo-datasource": "^0.6.3",
     "apollo-server": "^2.9.15",
     "apollo-server-express": "^2.9.15",
@@ -70,7 +71,7 @@
     "nodemon": "^2.0.1",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "send": "^0.17.1",
     "typescript": "^3.7.3",
     "uuid": "^3.3.3"

@@ -1,14 +1,14 @@
-type ContentPage {
+type Page @registerMutations {
   slug: String!
   richText(limit: Int): [RichText!]!
   activity(limit: Int): [Activity!]!
 }
 
-type Query {
-  page(slug: String!): ContentPage
+extend type Query {
+  page(slug: String!): Page
 }
 
-type Mutation {
-  createPage(slug: String, blocks: [String!]!): ContentPage
-  updatePage(slug: String, blocks: [String!]!): ContentPage
+extend type Mutation {
+  createPage(slug: String, blocks: [String!]!): Page
+  updatePage(slug: String, blocks: [String!]!): Page
 }

@@ -1,4 +1,4 @@
-type Article {
+type Article @registerMutations {
   slug: String!
   title: String!
   description: String!
@@ -31,13 +31,13 @@ input UpdateArticleInput {
   publishDate: Date
 }
 
-type Query {
+extend type Query {
   article(slug: String!): Article!
   articles: [Article!]!
   featuredArticle(target: Int!): Article!
 }
 
-type Mutation {
+extend type Mutation {
   createArticle(article: CreateArticleInput!): Article!
   updateArticle(slug: String!, article: UpdateArticleInput!): Article!
 }

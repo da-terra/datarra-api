@@ -1,6 +1,7 @@
-import { GraphQLFieldResolver } from "graphql";
-import withRoleGuard from "../../../middleware/hasRole";
 import { Role } from "@data-science-platform/shared";
+import { GraphQLFieldResolver } from "graphql";
+import hasRole from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
 type Arguments = {
   search?: string;
@@ -18,7 +19,7 @@ type Query = {
   };
 };
 
-const user: GraphQLFieldResolver<undefined, GraphQLContext> = async (
+const user: GraphQLFieldResolver<undefined, GraphQLContext, Arguments> = async (
   parent,
   args,
   { model }
@@ -41,4 +42,4 @@ const user: GraphQLFieldResolver<undefined, GraphQLContext> = async (
   return await model.User.find(query);
 };
 
-export default withRoleGuard(user, Role.ContentEditor);
+export default withResolverMiddleware(hasRole(Role.ContentEditor))(user);

@@ -13,7 +13,7 @@ type UserPhoto {
   value: String
 }
 
-type User {
+type User @registerMutations {
   provider: String
   id: ID
   displayName: String
@@ -24,6 +24,8 @@ type User {
   # Custom properties - not part of OAuth2.0 spec
   organizations: [Organization!]!
   role: Int
+
+  activity(limit: Int): [Activity!]!
 }
 
 input UpdateUserInput {
@@ -31,13 +33,13 @@ input UpdateUserInput {
   role: Int
 }
 
-type Query {
+extend type Query {
   me: User
 
   user(id: ID!): User!
   users(search: String, provider: String, organizations: [ID!]): [User!]!
 }
 
-type Mutation {
+extend type Mutation {
   updateUser(id: ID!, user: UpdateUserInput): User!
 }

@@ -14,7 +14,7 @@ const hasRole = (role: Role): GraphQLMiddleware => (
   if (role === Role.Admin) {
     throw new ApolloError(
       "INTERNAL_SERVER_ERROR",
-      "Don't use Admin role in `withRoleGuards`, this will allow all users to user the action. Please use `withAuthGuard` instead if this is the intended behavior"
+      "Don't use Admin role in `hasRole`, this will allow all users to user the action. Please use `isAuthenticated` instead"
     );
   }
 

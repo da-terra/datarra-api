@@ -1,12 +1,6 @@
-import {
-  Event,
-  IUpdateEventInput,
-  Resource,
-  Role
-} from "@data-science-platform/shared";
+import { IUpdateEventInput, Role } from "@data-science-platform/shared";
 import { UserInputError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
-import registerActivity from "../../../../util/registerActivity";
 import hasRole from "../../../middleware/hasRole";
 import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
@@ -46,13 +40,6 @@ const updateEventResolver: GraphQLFieldResolver<
 
   const updatedEvent = await model.Event.findOne({
     slug: args.event.slug && args.slug
-  });
-
-  await registerActivity(context, {
-    event: Event.UpdateEvent,
-    // eslint-disable-next-line
-    resource: updatedEvent!.id,
-    resourceType: Resource.Event
   });
 
   return updatedEvent;

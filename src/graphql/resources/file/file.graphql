@@ -1,6 +1,6 @@
 scalar Upload
 
-type File {
+type File @registerMutations {
   id: ID!
   filename: String!
   mimetype: String!
@@ -8,12 +8,12 @@ type File {
   createdDate: String!
 }
 
-type Query {
+extend type Query {
   file(id: ID!): [File!]!
   files(search: String, mimetype: String, encoding: String): [File!]!
 }
 
-type Mutation {
+extend type Mutation {
   uploadFile(file: Upload!): File!
   deleteFile(file: ID!): Boolean!
 }

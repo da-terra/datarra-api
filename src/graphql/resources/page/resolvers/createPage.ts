@@ -1,7 +1,8 @@
+import { Role } from "@data-science-platform/shared";
 import { UserInputError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
-import { Role } from "@data-science-platform/shared";
-import withRoleGuard from "../../../middleware/hasRole";
+import hasRole from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
 type Arguments = {
   slug: string;
@@ -32,4 +33,4 @@ const createPage: GraphQLFieldResolver<
   return page;
 };
 
-export default withRoleGuard(createPage, Role.ContentEditor);
+export default withResolverMiddleware(hasRole(Role.ContentEditor))(createPage);

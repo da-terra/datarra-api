@@ -7,6 +7,6 @@ type Activity {
   createdDate: Date!
 }
 
-type Query {
+extend type Query {
   activities(me: Boolean, users: [String!]): [Activity!]!
 }

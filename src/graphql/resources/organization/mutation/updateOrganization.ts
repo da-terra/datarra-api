@@ -1,11 +1,5 @@
-import {
-  Event,
-  IUpdateOrganizationInput,
-  Resource,
-  Role
-} from "@data-science-platform/shared";
+import { IUpdateOrganizationInput, Role } from "@data-science-platform/shared";
 import { GraphQLFieldResolver } from "graphql";
-import registerActivity from "../../../../util/registerActivity";
 import hasRole from "../../../middleware/hasRole";
 import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
@@ -27,12 +21,6 @@ const updateOrganizationResolver: GraphQLFieldResolver<
     },
     organization
   );
-
-  await registerActivity(context, {
-    event: Event.UpdateOrganization,
-    resourceType: Resource.Organization,
-    resource: updatedOrganization.id
-  });
 
   return updatedOrganization;
 };

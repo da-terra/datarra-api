@@ -1,9 +1,8 @@
-import { GraphQLFieldResolver } from "graphql";
-import { ApolloError } from "apollo-server";
 import { IEvent, Role } from "@data-science-platform/shared";
-import withRoleGuard from "../../../middleware/hasRole";
-import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
+import { ApolloError } from "apollo-server";
+import { GraphQLFieldResolver } from "graphql";
 import hasRole from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
 type Arguments = {
   event: IEvent;

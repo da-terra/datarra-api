@@ -1,9 +1,8 @@
-import { Event, IArticle, Role, Resource } from "@data-science-platform/shared";
+import { IArticle, Role } from "@data-science-platform/shared";
 import { ApolloError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
 import hasRole from "../../../middleware/hasRole";
 import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
-import registerActivity from "../../../../util/registerActivity";
 
 type Arguments = {
   slug: string;
@@ -40,13 +39,6 @@ const updateArticleResolver: GraphQLFieldResolver<
 
   const updatedArticle = await model.Article.findOne({
     slug: args.article.slug && args.slug
-  });
-
-  await registerActivity(context, {
-    event: Event.UpdateArticle,
-    // eslint-disable-next-line
-    resource: updatedArticle!.id,
-    resourceType: Resource.Article
   });
 
   return updatedArticle;

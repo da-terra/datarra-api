@@ -18,7 +18,7 @@ type QuickscanResultAnswer {
   value: Float!
 }
 
-type QuickscanResult {
+type QuickscanResult @registerMutations {
   uuid: ID!
   target: Int!
   company: QuickscanResultCompany!
@@ -48,11 +48,11 @@ input QuickscanResultPersonInput {
   phone: String
 }
 
-type Query {
+extend type Query {
   quickscanResult(uuid: String!): QuickscanResult
 }
 
-type Mutation {
+extend type Mutation {
   createQuickscanResult(
     target: Int!
     company: QuickscanResultCompanyInput!

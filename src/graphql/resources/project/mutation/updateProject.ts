@@ -1,7 +1,6 @@
-import { Event, Resource, Role } from "@data-science-platform/shared";
+import { Role } from "@data-science-platform/shared";
 import { ApolloError, UserInputError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
-import registerActivity from "../../../../util/registerActivity";
 import hasRole from "../../../middleware/hasRole";
 import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
@@ -42,17 +41,9 @@ const updateProject: GraphQLFieldResolver<
     );
   }
 
-  const updatedProject = await model.Project.findOne({
+  return await model.Project.findOne({
     shortName: project.shortName
   });
-
-  await registerActivity(context, {
-    event: Event.UpdateProject,
-    resourceType: Resource.Project,
-    resource: updatedProject!.id
-  });
-
-  return updatedProject;
 };
 
 export default withResolverMiddleware(hasRole(Role.ContentEditor))(

@@ -1,9 +1,8 @@
-import { Event, Resource, Role } from "@data-science-platform/shared";
+import { Role } from "@data-science-platform/shared";
 import { UserInputError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
-import registerActivity from "../../../../util/registerActivity";
-import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 import hasRole from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
 type Arguments = {
   project: {
@@ -66,15 +65,7 @@ const createProject: GraphQLFieldResolver<
     ]
   };
 
-  const newProject = await model.Project.create(projectInput);
-
-  await registerActivity(context, {
-    event: Event.CreateProject,
-    resourceType: Resource.Project,
-    resource: newProject.id
-  });
-
-  return newProject;
+  return await model.Project.create(projectInput);
 };
 
 export default withResolverMiddleware(hasRole(Role.ContentEditor))(

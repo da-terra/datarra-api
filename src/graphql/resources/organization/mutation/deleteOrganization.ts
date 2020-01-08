@@ -1,6 +1,5 @@
-import { Event, Resource, Role } from "@data-science-platform/shared";
+import { Role } from "@data-science-platform/shared";
 import { GraphQLFieldResolver } from "graphql";
-import registerActivity from "../../../../util/registerActivity";
 import hasRole from "../../../middleware/hasRole";
 import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
@@ -22,12 +21,6 @@ const deleteOrganizationResolver: GraphQLFieldResolver<
   if (action.ok !== 1) {
     return false;
   }
-
-  await registerActivity(context, {
-    event: Event.DeleteOrganization,
-    resourceType: Resource.Organization,
-    resource: id
-  });
 
   return true;
 };

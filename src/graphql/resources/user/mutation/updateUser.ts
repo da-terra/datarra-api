@@ -1,7 +1,8 @@
 import { GraphQLFieldResolver } from "graphql";
 import { UserInputError } from "apollo-server";
 import { Role } from "@data-science-platform/shared";
-import withRoleGuard from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
+import hasRole from "../../../middleware/hasRole";
 
 type Arguments = {
   id: string;
@@ -26,4 +27,6 @@ const updateUserResolver: GraphQLFieldResolver<
   return await model.User.findOne({ id });
 };
 
-export default withRoleGuard(updateUserResolver, Role.ContentEditor);
+export default withResolverMiddleware(hasRole(Role.ContentEditor))(
+  updateUserResolver
+);

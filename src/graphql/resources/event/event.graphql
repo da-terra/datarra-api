@@ -1,4 +1,4 @@
-type Event {
+type Event @registerMutations {
   slug: String!
   color: String!
   title: String!
@@ -15,12 +15,12 @@ input EventInput {
   richText: RichTextInput
 }
 
-type Query {
+extend type Query {
   event(slug: String): Event
   events: [Event!]!
 }
 
-type Mutation {
+extend type Mutation {
   createEvent(event: EventInput): Event!
   updateEvent(event: EventInput): Event!
   deleteEvent(slug: String): Event!

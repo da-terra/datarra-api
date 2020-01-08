@@ -1,6 +1,7 @@
-import { GraphQLFieldResolver } from "graphql";
 import { Role } from "@data-science-platform/shared";
-import withRoleGuard from "../../../middleware/hasRole";
+import { GraphQLFieldResolver } from "graphql";
+import hasRole from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
 type Arguments = {
   uuid: string;
@@ -16,4 +17,6 @@ const deleteQuickscanResult: GraphQLFieldResolver<
   return true;
 };
 
-export default withRoleGuard(deleteQuickscanResult, Role.ContentEditor);
+export default withResolverMiddleware(hasRole(Role.ContentEditor))(
+  deleteQuickscanResult
+);

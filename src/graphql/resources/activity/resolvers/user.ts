@@ -17,7 +17,7 @@ const userResolver: GraphQLFieldResolver<
 
   if (!user) {
     throw new ApolloError(
-      `User (${parent.user}) for activity \`${parent.event}\` not found`,
+      `User (${parent.user}) for activity \`${parent.model}\` not found`,
       "NOT_FOUND"
     );
   }

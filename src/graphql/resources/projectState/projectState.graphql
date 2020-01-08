@@ -1,4 +1,4 @@
-type ProjectState {
+type ProjectState @registerMutations {
   id: String!
 
   name: String!
@@ -23,11 +23,11 @@ input UpdateProjectStateInput {
   rollbackState: String
 }
 
-type Query {
+extend type Query {
   projectStates: [ProjectState!]!
 }
 
-type Mutation {
+extend type Mutation {
   createProjectState(projectState: CreateProjectStateInput!): ProjectState!
   updateProjectState(
     id: String!

@@ -37,11 +37,3 @@ input ImageInput {
   alt: String
   fallbackColor: String
 }
-
-type Query {
-  _: Boolean!
-}
-
-type Mutation {
-  _: Boolean!
-}

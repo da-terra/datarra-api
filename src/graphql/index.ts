@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { buildFederatedSchema } from "@apollo/federation";
 import { Resource } from "@data-science-platform/shared";
-import directives from "./directives";
+import { DocumentNode } from "graphql";
+import { mergeSchemas } from "graphql-tools";
+import { schema as directives, schemaDirectives } from "./directives";
 import activity from "./resources/activity";
 import article from "./resources/article";
 import event from "./resources/event";
@@ -13,8 +16,6 @@ import quickscanQuestion from "./resources/quickscanQuestion";
 import quickscanResult from "./resources/quickscanResult";
 import user from "./resources/user";
 import shared from "./shared";
-import { makeExecutableSchema, mergeSchemas } from "apollo-server";
-import { DocumentNode } from "graphql";
 
 export const plugins = [];
 
@@ -34,12 +35,13 @@ const resourceSchemas: {
   QuickscanResult: quickscanResult
 };
 
-const executableSchemas = [
-  shared,
+const federatedSchema = buildFederatedSchema([
   directives,
+  shared,
   ...Object.values(resourceSchemas)
-].map(schema => makeExecutableSchema(schema));
+]);
 
 export const schema = mergeSchemas({
-  schemas: executableSchemas
+  schemas: [federatedSchema],
+  schemaDirectives
 });

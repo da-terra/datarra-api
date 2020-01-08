@@ -1,7 +1,8 @@
 import { IQuickscanQuestion, Role } from "@data-science-platform/shared";
 import { UserInputError } from "apollo-server";
 import { GraphQLFieldResolver } from "graphql";
-import withRoleGuard from "../../../middleware/hasRole";
+import hasRole from "../../../middleware/hasRole";
+import withResolverMiddleware from "../../../middleware/withResolverMiddleware";
 
 type Arguments = IQuickscanQuestion;
 
@@ -31,4 +32,6 @@ const updateQuickscanQuestion: GraphQLFieldResolver<
   return updatedQuestion;
 };
 
-export default withRoleGuard(updateQuickscanQuestion, Role.ContentEditor);
+export default withResolverMiddleware(hasRole(Role.ContentEditor))(
+  updateQuickscanQuestion
+);

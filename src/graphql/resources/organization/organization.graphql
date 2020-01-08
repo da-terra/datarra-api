@@ -1,4 +1,4 @@
-type Organization @model(name: "Organization") {
+type Organization @registerMutations {
   id: String!
   name: String!
   image: Image
@@ -18,12 +18,12 @@ input UpdateOrganizationInput {
   locations: [LocationInput!]
 }
 
-type Query {
+extend type Query {
   organization(id: ID!): Organization!
   organizations: [Organization!]!
 }
 
-type Mutation {
+extend type Mutation {
   createOrganization(organization: CreateOrganizationInput!): Organization!
   updateOrganization(
     id: ID!

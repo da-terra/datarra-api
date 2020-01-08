@@ -4,7 +4,7 @@ type QuickscanQuestionOption {
   value: Float
 }
 
-type QuickscanQuestion {
+type QuickscanQuestion @registerMutations {
   id: ID
   question: String
   body: String
@@ -21,11 +21,11 @@ input QuickscanQuestionOptionInput {
   value: Float
 }
 
-type Query {
+extend type Query {
   quickscanQuestions(target: Int): [QuickscanQuestion!]!
 }
 
-type Mutation {
+extend type Mutation {
   createQuickscanQuestion(
     question: String
     target: Int

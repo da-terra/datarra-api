@@ -1,1 +1,1 @@
-directive @model(name: String) on OBJECT | FIELD_DEFINITION
+directive @registerMutations on OBJECT

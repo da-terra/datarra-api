@@ -3,7 +3,7 @@ type ProjectDuration {
   endDate: Date
 }
 
-type Project {
+type Project @registerMutations {
   shortName: ID!
   title: String!
   organizations: [Organization!]!
@@ -35,12 +35,12 @@ input UpdateProjectInput {
   duration: ProjectDurationInput
 }
 
-type Query {
+extend type Query {
   project(shortName: ID!): Project!
   projects(userOnly: Boolean): [Project!]!
 }
 
-type Mutation {
+extend type Mutation {
   createProject(project: CreateProjectInput!): Project!
   updateProject(shortName: String!, project: UpdateProjectInput!): Project!
   deleteProject(shortName: String!): Boolean!

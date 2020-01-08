@@ -1,13 +1,10 @@
 import { loader } from "graphql.macro";
-import RegisterMutationDirective from "./RegisterMutationDirective";
+import RegisterMutationsDirective from "./RegisterMutationsDirective";
 
-const schemaDirectives = {
-  model: RegisterMutationDirective
+export const schemaDirectives = {
+  registerMutations: RegisterMutationsDirective
 };
 
-const typeDefs = loader("./directives.graphql");
-
-export default {
-  typeDefs,
-  schemaDirectives
+export const schema = {
+  typeDefs: loader("./directives.graphql")
 };
