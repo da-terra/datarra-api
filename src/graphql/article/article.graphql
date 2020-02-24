@@ -57,7 +57,7 @@ extend type Query {
     minScore: Float
     maxScore: Float
   ): [Article!]!
-  featuredArticle(target: Int!): Article
+  featuredArticle(target: Int): Article
 }
 
 # extend type Mutation {

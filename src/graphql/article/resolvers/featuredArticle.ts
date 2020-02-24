@@ -6,11 +6,7 @@ type Arguments = {
 };
 
 export default (async (parent, args, { dataSources }, info) => {
-  const { target } = args;
-
-  const article = await dataSources.mongoose.Article.findOne({
-    target
-  });
+  const article = await dataSources.mongoose.Article.findOne({});
 
   if (article == null) {
     throw new ApolloError(`Article not found`, "NOT_FOUND");
